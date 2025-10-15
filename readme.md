@@ -69,7 +69,7 @@ Every choice Arya makes carries emotional consequences—each decision pushing h
 
 - **Hafizh Ahmad Al-Abror** - *Programmer* - 707082330117 - [xyukii](https://github.com/xyukii)
 - **Isaac Hope Marcelino Purba** - *Assets* - 707082300122 - [isaacpurba1](https://github.com/isaacpurba1)
-- **Muhammad Andhika Widyadhana** - *Story Designer* - 707082300151 - [xyukii](https://github.com/xyukii)
+- **Muhammad Andhika Widyadhana** - *Story Designer* - 707082300151 - [gatrix23](https://github.com/gatrix23)
 - **Achmad zaky** - *Story Progression* - 707082330112 - [Fryndazs](https://github.com/Fryndazs/)
 
 ## 🙏 Acknowledgments
