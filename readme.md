@@ -1,51 +1,50 @@
-# The Dusk Boundary Line
+# 🌇 The Dusk Boundary Line
 
-A game development project that reflects human burnouts in adult world.
+_A narrative-driven indie game that explores burnout, emotional boundaries, and the fragile balance of adult life._
+
+---
 
 ## 🎮 About
 
-**The Dusk Boundary Line** explores the emotional journey of burnout in modern adult life. Set in the liminal space between day and night, the game metaphorically represents the blurred boundaries between work and personal life, rest and exhaustion, dreams and reality.
+**The Dusk Boundary Line** follows **Arya**, a 28-year-old data analyst trapped in the endless cycle of overwork and family debt. Through atmospheric storytelling and emotionally reactive gameplay, players experience the weight of **modern burnout**, the **struggle to set boundaries**, and the **search for meaning amid exhaustion**.
 
-### Theme
-Through atmospheric storytelling and meaningful gameplay mechanics, players experience the psychological weight of burnout, the struggle to maintain balance, and the difficult path toward recovery and self-discovery.
+Set in a liminal world between day and night, the game symbolically mirrors the blurred boundaries between **work and personal life**, **rest and productivity**, and **dreams and despair**.
 
-### Core Experience
-- Navigate through shifting environments that mirror emotional states
-- Experience the gradual descent into burnout and the challenging journey back
-- Discover moments of clarity in the quiet spaces between obligations
-- Find meaning in the boundary between productivity and rest
+---
+
+## 🌌 Theme
+
+> “Sometimes, survival feels like choosing which part of yourself to sacrifice.”
+
+The central theme revolves around **professional burnout**, **boundaries**, and **the cost of endurance**.  
+Every choice Arya makes carries emotional consequences—each decision pushing him closer to either healing or collapse.
+
+---
+
+## 💡 Core Experience
+
+- Navigate through shifting environments that reflect Arya’s emotional states  
+- Experience the **gradual descent into burnout** and the difficult path toward recovery  
+- Discover **moments of clarity** hidden between work and exhaustion  
+- Find meaning in the **grey zone** between productivity and peace  
+- Shape Arya’s destiny through **branching narrative routes**
+
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- [Add required software/tools]
-- [Game engine and version]
-- [Dependencies]
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/xyukii/thedusk-boundaryline-game.git
-cd thedusk-boundaryline-game
-
-# [Add setup steps]
-```
-
-### Running the Game
-
-```bash
-# [Add commands to run the game]
-```
+- [Twine](https://twinery.org/)
+- [Renpy](https://www.renpy.org/)
+- [Git](https://git-scm.com/)
+- [VSCODE](https://code.visualstudio.com/)
 
 ## 🎯 Features
 
 - [ ] [Feature 1]
 - [ ] [Feature 2]
 - [ ] [Feature 3]
-
-## 🛠️ Development
 
 ### Project Structure
 
@@ -55,28 +54,6 @@ cd thedusk-boundaryline-game
 ├── Scenes/         # Game scenes/levels
 └── Docs/           # Documentation
 ```
-
-### Building
-
-```bash
-# [Add build instructions]
-```
-
-### Testing
-
-```bash
-# [Add testing commands]
-```
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## 📝 Roadmap
 
@@ -88,13 +65,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - [ ] Beta testing
 - [ ] Release preparation
 
-## 📄 License
-
-[Add your license here - e.g., MIT, GPL, etc.]
-
 ## 👥 Authors
 
-- **xyukii** - *Initial work* - [xyukii](https://github.com/xyukii)
+- **Hafizh Ahmad Al-Abror** - *Programmer* - 707082330117 - [xyukii](https://github.com/xyukii)
+- **Isaac Hope Marcelino Purba** - *Programmer* - 707082300122 - [xyukii](https://github.com/xyukii)
+- **Muhammad Andhika Widyadhana** - *Programmer* - 707082300151 - [xyukii](https://github.com/xyukii)
+- **Achmad zaky** - *Programmer* - 707082330112 - [xyukii](https://github.com/xyukii)
 
 ## 🙏 Acknowledgments
 
