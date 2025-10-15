@@ -1,0 +1,184 @@
+:: Start
+(set: $stamina to 100)
+(set: $hubunganLina to 50)
+(set: $bukti to false)
+
+"**Garis Batas Senja**"  
+_(The Dusk Boundary Line)_
+
+**Prolog — Pukul 23:45**  
+Arya duduk di meja kantornya yang sepi. Cahaya biru monitor memantulkan wajah lelahnya.  
+Ponselnya bergetar—pesan dari Lina: _"Mas, jangan lupa besok bayar kos ya, atau utang kita bakal ditagih lagi."_  
+
+Monolog batin Arya:  
+> “Aku hanya perlu menyelesaikan ini. Hanya ini. Besok semuanya akan lebih baik... Tapi, apakah benar-benar akan lebih baik?”
+
+[[Ambil screenshot dan rekam voice note Bima|Prolog Bukti]]  
+[[Langsung fokus mengerjakan laporan|Prolog Fokus]]
+
+---
+
+:: Prolog Bukti
+(set: $bukti to true)
+You obtained **[Bukti Terkumpul]**.  
+_(Status evidence aktif — bisa digunakan nanti untuk menghadapi Bima.)_  
+
+[[Lanjut ke Event 1: Tekanan Puncak|Event 1]]
+
+---
+
+:: Prolog Fokus
+Arya menutup pesan Lina dan menatap layar monitor lagi. Tak ada waktu untuk hal lain malam ini.
+
+[[Lanjut ke Event 1: Tekanan Puncak|Event 1]]
+
+---
+
+:: Event 1
+**Event 1 — Tekanan Puncak**
+
+Tengah malam. Kantor sunyi, hanya suara pendingin udara.  
+Voice note dari Bapak Bima masuk:  
+> “Arya, revisi laporan itu! Saya mau hasilnya jam enam pagi udah siap!”
+
+Apa yang Arya lakukan?
+
+[[“Aku tidak punya pilihan lain.” (Patuh)|Event1 Patuh]]  
+[[“Cukup. Aku harus berhenti malam ini.” (Tetapkan batas)|Event1 Batas]]
+
+---
+
+:: Event1 Patuh
+(set: $stamina to $stamina - 50)
+**Stamina berkurang drastis.**  
+Arya menghabiskan sisa malam di kantor dan hanya tidur 45 menit.  
+Pagi datang dengan kepala berat dan mata merah.
+
+[[Lanjut ke Event 2: Krisis Pribadi|Event 2]]
+
+---
+
+:: Event1 Batas
+(set: $stamina to $stamina + 10)
+Arya membereskan tasnya dan pulang, meninggalkan 10% pekerjaan.  
+Ia tidur empat jam penuh. Pagi pukul 07:00, telepon dari Bapak Bima berdering.
+
+[[Lanjut ke Event 3: Pelepasan Emosi|Event 3]]
+
+---
+
+:: Event 2
+**Event 2 — Krisis Pribadi (Jalur Kepatuhan)**  
+
+Pagi hari, meeting penting dengan klien. Arya menjelaskan grafik dengan mata berat.  
+Tiba-tiba ponselnya bergetar hebat:  
+Pesan darurat dari Lina:  
+> “Mas, angkat! Ibu dibawa ke UGD! Aku butuh keputusanmu sekarang!”
+
+[[Abaikan ponsel, fokus pada klien|Event2 Klien]]  
+[[Minta izin keluar 5 menit untuk Lina|Event2 Lina]]
+
+---
+
+:: Event2 Klien
+(set: $hubunganLina to $hubunganLina - 30)
+Meeting berjalan lancar. Proyek Alpha aman, tapi Lina merasa diabaikan.  
+Bapak Bima memuji profesionalismemu.
+
+[[Lanjut ke Ending: Kemenangan Kosong|Ending KemenanganKosong]]
+
+---
+
+:: Event2 Lina
+(set: $hubunganLina to $hubunganLina + 30)
+Arya minta izin keluar, mengangkat telepon Lina.  
+Klien tampak tidak senang, dan Bima menatap tajam.
+
+[[Lanjut ke Ending: Pelarian|Ending Pelarian]]
+
+---
+
+:: Event 3
+**Event 3 — Pelepasan Emosi (Crashout)**
+
+Siang hari di kantor.  
+Bapak Bima membentak Arya di depan semua orang:  
+> “Kamu pikir kamu siapa? Nggak profesional! Nggak loyal!”
+
+Pilihan Arya?
+
+[[Menunduk dan meminta maaf|Event3 Maaf]]  
+[[Membentak balik tanpa bukti|Event3 Emosi]]  
+(if: $bukti is true)[[[Membentak balik sambil membongkar bukti|Event3 Bukti]]]
+
+---
+
+:: Event3 Maaf
+(set: $stamina to $stamina - 30)
+Arya menunduk dan berkata pelan, “Maaf, Pak.”  
+Semua orang diam. Ia tahu harga dirinya hilang.
+
+[[Lanjut ke Ending: Pelarian|Ending Pelarian]]
+
+---
+
+:: Event3 Emosi
+(set: $stamina to $stamina - 40)
+Arya akhirnya meledak.  
+> “Sudah cukup! Semua kerjaan Anda saya yang tangani!”  
+Ia dipecat seketika, tapi untuk pertama kalinya merasa bebas.
+
+[[Lanjut ke Ending: Keberanian|Ending Keberanian]]
+
+---
+
+:: Event3 Bukti
+(set: $stamina to $stamina - 20)
+Arya berdiri tegak, membuka laptop, dan memutar voice note Bima.  
+> “Lihat ini! Semua orang di kantor tahu siapa yang sebenarnya kerja!”  
+Suasana membeku. Bima pucat.
+
+[[Lanjut ke Ending: Keberanian|Ending Keberanian]]
+
+---
+
+:: Ending KemenanganKosong
+**Rute 1 — Kemenangan Kosong (The Hollow Victory)**  
+
+Arya berhasil menyelesaikan Proyek Alpha.  
+Bima memberinya bonus dan jabatan baru. Utang terbayar, tapi Lina menjauh.  
+
+> “Aku menang... tapi kenapa rasanya kosong?”
+
+**Judul Akhir:** _Keberhasilan yang Paling Menyedihkan._
+
+[[Main Ulang|Start]]
+
+---
+
+:: Ending Keberanian
+**Rute 2 — Keberanian (The Stand)**  
+
+Arya meninggalkan kantor dengan kepala tegak.  
+Lina menyambutnya dengan pelukan hangat.  
+Beberapa minggu kemudian, Arya bekerja di perusahaan baru yang lebih manusiawi.
+
+> “Aku bisa melunasi utangku tanpa kehilangan diriku.”
+
+**Judul Akhir:** _Awal Baru yang Manusiawi._
+
+[[Main Ulang|Start]]
+
+---
+
+:: Ending Pelarian
+**Rute 3 — Pelarian (The Escape)**  
+
+Arya tak lagi kuat melanjutkan semuanya.  
+Ia menutup laptop, mematikan ponsel, dan naik bus ke arah yang tak pasti.  
+
+> “Aku tidak tahu ke mana, tapi untuk pertama kalinya... aku bisa bernapas.”
+
+**Judul Akhir:** _Memilih Ketidakpastian daripada Kehancuran._
+
+[[Main Ulang|Start]]
