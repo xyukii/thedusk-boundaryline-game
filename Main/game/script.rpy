@@ -28,22 +28,22 @@ image bg bus_night = im.Scale("images/bus_night.png", config.screen_width, confi
 image bg sunset_city = im.Scale("images/sunset_city.png", config.screen_width, config.screen_height)
 image bg office_window = im.Scale("images/office_window.png", config.screen_width, config.screen_height)
 
-default stamina = 100
-default hubungan_lina = 50
-default BuktiTerkumpul = False
-
 label start:
     scene bg office_night with fade
     show arya stress at center
+    play sound "audio/music/angin.mp3" loop
     n "Kantor sudah sepi. Jam hampir menunjukkan tengah malam."
+    play sound "audio/sfx/kibot.mp3" loop
     n "Di antara deretan meja yang gelap, hanya satu layar monitor yang masih menyala — milik Arya, analis data berumur 28 tahun."
 
     a "Angka-angka ini kayak mimpi buruk yang nggak kelar-kelar."
-
+    stop sound
+    play sound "audio/sfx/notif.mp3"
     n "(Notifikasi ponsel berbunyi.)"
+    stop sound
     show lina sad at left
-    l "Mas, besok batas bayar kos. Aku udah kehabisan cara, Mas…"
-    a "Maaf, Lin… sebentar lagi selesai."
+    l "(Mas, besok batas bayar kos. Aku udah kehabisan cara, Mas…)"
+    a "(Maaf, Lin… sebentar lagi selesai)."
 
     show bima angry at right
     b "Arya, tolong revisi data malam ini. Klien minta jam 6 pagi. Jangan tidur dulu."
@@ -51,21 +51,14 @@ label start:
 
     menu:
         "Tetap kerja lembur sampai pagi":
-            $ stamina -= 30
-            $ hubungan_lina -= 20
-            hide lina
-            hide bima
             jump ep1_lembur
         "Matikan laptop dan istirahat":
-            $ stamina += 20
-            $ hubungan_lina += 10
-            hide lina
-            hide bima
             jump ep1_tidur
 
 label ep1_lembur:
     show arya neutral at center
     a "Udah biasa kok. Nanti bisa istirahat setelah ini…"
+    play sound "audio/sfx/kibot.mp3" loop
     n "Layar monitor perlahan redup, tapi matanya masih terbuka."
     n "Pagi datang tanpa sempat bermimpi."
     hide arya
@@ -88,22 +81,20 @@ label episode2:
     show bima neutral at right
     b "Lumayan kerja kamu semalam. Tapi formatnya salah. Ulang lagi."
     a "Baik, Pak."
-
+    stop sound
+    play sound "audio/sfx/notif.mp3"
     n "(Telepon berdering. Nama 'Lina' muncul.)"
     show lina sad at left
-    l "Mas, aku diancam mau diusir hari ini!"
+    l "(Mas, aku diancam mau diusir hari ini!)"
 
     b "Arya! Matikan HP! Fokus dulu, ini rapat penting!"
 
     menu:
         "Angkat telepon dan bantu Lina":
-            $ hubungan_lina += 30
-            $ stamina -= 10
             hide bima
             hide lina
             jump ep2_telpon
         "Abaikan telepon dan terus kerja":
-            $ hubungan_lina -= 25
             hide bima
             hide lina
             jump ep2_kerja
@@ -132,31 +123,30 @@ label ep2_kerja:
 label episode3:
     scene bg office_day with fade
     show arya stress at center
+    stop sound
+    play sound "audio/sfx/kibot.mp3" loop
     n "Hari berganti tanpa sadar. Arya hanya mengenal tiga hal: layar, kopi, dan tekanan."
 
     show bima angry at right
+    stop sound
     b "Data ini masih salah! Ulang dari awal!"
     a "Pak, saya udah kerja tiga malam tanpa tidur…"
     b "Itu urusan kamu, bukan saya!"
 
     n "(Telepon lagi — Lina.)"
     show lina sad at left
-    l "Mas, Ibu pingsan! Aku di rumah sakit. Tolong datang!"
+    l "(Mas, Ibu pingsan! Aku di rumah sakit. Tolong datang!)"
 
     menu:
         "Pergi ke rumah sakit":
-            $ hubungan_lina += 30
-            $ stamina -= 10
             hide bima
             hide lina
             jump ep3_rumahsakit
         "Tetap di kantor":
-            $ hubungan_lina -= 40
             hide bima
             hide lina
             jump ep3_kantor
         "Rekam semua percakapan dengan Bima":
-            $ BuktiTerkumpul = True
             hide bima
             hide lina
             jump ep3_rekam
@@ -177,7 +167,7 @@ label ep3_rumahsakit:
 label ep3_kantor:
     show arya stress at center
     a "Kerja ini… nggak sepadan dengan yang hilang."
-    n "Pesan masuk: 'Mas… Ibu di UGD.'"
+    n "(Pesan masuk: 'Mas… Ibu di UGD.')"
     hide lina
     hide arya
     jump episode4
