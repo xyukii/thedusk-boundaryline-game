@@ -254,7 +254,7 @@ screen quick_menu():
             textbutton _("Simpan") action ShowMenu('save')
             textbutton _("Simpan.C") action QuickSave()
             textbutton _("Muat.C") action QuickLoad()
-            textbutton _("Setting") action ShowMenu('preferences')
+            textbutton _("Setting") action ShowMenu('settings')
 
 
 ## Kode ini memastikan layar quick_menu di tampilkan di dalam permainan,
@@ -298,37 +298,26 @@ screen navigation():
 
         spacing gui.navigation_spacing
 
+        # Unified Play button: opens the play menu (New Game / Load)
+        textbutton _("Mulai") action ShowMenu("play_menu")
+
         if main_menu:
-
-            textbutton _("Mulai") action Start()
-
+            # On the main menu we only surface the play button (start/load).
+            pass
         else:
-
+            # In-game, show some common options after Play.
             textbutton _("Riwayat") action ShowMenu("history")
-
             textbutton _("Simpan") action ShowMenu("save")
 
-        textbutton _("Muat") action ShowMenu("load")
-
-        textbutton _("Setting") action ShowMenu("preferences")
+        # Settings groups Setting/About/Help into a single settings menu.
+        textbutton _("Setting") action ShowMenu("settings")
 
         if _in_replay:
-
             textbutton _("Akhiri Replay") action EndReplay(confirm=True)
-
         elif not main_menu:
-
             textbutton _("Menu Utama") action MainMenu()
 
-        textbutton _("Tentang") action ShowMenu("about")
-
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
-
-            ## Bantuan tidak perlu atau relevan dengan perangkat mobile.
-            textbutton _("Bantuan") action ShowMenu("help")
-
         if renpy.variant("pc"):
-
             ## Tombol keluar dilarang di iOS dan tidak diperlukan di Android
             ## dan Web.
             textbutton _("Keluar") action Quit(confirm=not main_menu)
@@ -538,6 +527,50 @@ style return_button:
     xpos gui.navigation_xpos
     yalign 1.0
     yoffset -45
+
+
+## Play menu - combines New Game and Load into one page.
+screen play_menu():
+
+    tag menu
+
+    use game_menu(_("Mulai"), scroll="viewport"):
+
+        vbox:
+
+            textbutton _("Mulai Baru"):
+                action Start()
+
+            textbutton _("Muat"):
+                action ShowMenu("load")
+
+            if config.has_quicksave:
+                textbutton _("Muat Cepat") action QuickLoad()
+
+            textbutton _("Kembali"):
+                action Return()
+
+
+## Settings menu - groups preferences, about, and help into one entry point.
+screen settings():
+
+    tag menu
+
+    use game_menu(_("Setting"), scroll="viewport"):
+
+        vbox:
+
+            textbutton _("Pengaturan"):
+                action ShowMenu("preferences")
+
+            textbutton _("Tentang"):
+                action ShowMenu("about")
+
+            textbutton _("Bantuan"):
+                action ShowMenu("help")
+
+            textbutton _("Kembali"):
+                action Return()
 
 
 ## Layar About #################################################################

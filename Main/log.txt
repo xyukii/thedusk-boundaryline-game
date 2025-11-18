@@ -1,0 +1,86 @@
+2025-11-18 14:19:40 UTC
+Windows-11-10.0.26100-SP0
+Ren'Py 8.4.1.25072401
+
+Early init took 35 ms
+Loading error handling took 90 ms
+Loading script took 134 ms
+Loading save slot metadata took 316 ms
+Loading persistent took 0 ms
+Running init code took 150 ms
+Loading analysis data took 19 ms
+Analyze and compile ATL took 1 ms
+Reloading save slot metadata took 2 ms
+Dump and make backups took 31 ms
+Cleaning cache took 0 ms
+Making clean stores took 0 ms
+Initial gc took 26 ms
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 189 ms
+Init translation took 0 ms
+Cleaning stores took 0 ms
+Load screen analysis took 31 ms
+Analyze screens took 1 ms
+Save screen analysis took 0 ms
+Save pyanalysis took 0 ms
+Save bytecode took 0 ms
+Running _start took 0 ms
+Interface start took 270 ms
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce GTX 1650/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 577.03'
+Display Info: <Info({'bitsize': 32, 'bytesize': 4, 'masks': (16711680, 65280, 255, 0), 'shifts': (16, 8, 0, 0), 'losses': (0, 0, 0, 8), 'current_w': 1920, 'current_h': 1080, 'refresh_rate': 144, 'hw': False, 'wm': True, 'video_mem': 268435456, 'blit_hw': False, 'blit_hw_CC': False, 'blit_hw_A': False, 'blit_sw': False, 'blit_sw_CC': False, 'blit_sw_A': False})>
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Cleaning stores took 2 ms
+Load screen analysis took 24 ms
+Analyze screens took 0 ms
+Running _start took 3 ms
+Resetting cache.
+Early init took 10 ms
+Loading error handling took 22 ms
+Loading script took 276 ms
+Loading save slot metadata took 16 ms
+Loading persistent took 0 ms
+Running init code took 31 ms
+Loading analysis data took 3 ms
+Analyze and compile ATL took 2 ms
+Reloading save slot metadata took 2 ms
+Backing up script files to 'C:\\Users\\User\\AppData\\Roaming/RenPy/backups\\Main':
+Dump and make backups took 32 ms
+Cleaning cache took 0 ms
+Making clean stores took 0 ms
+Initial gc took 33 ms
+DPI scale factor: 1.250000
+Creating interface object took 2 ms
+Init translation took 0 ms
+Cleaning stores took 0 ms
+Load screen analysis took 0 ms
+Analyze screens took 8 ms
+Save screen analysis took 8 ms
+Save pyanalysis took 3 ms
+Save bytecode took 2 ms
+Running _start took 1 ms
+Interface start took 184 ms
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce GTX 1650/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 577.03'
+Display Info: <Info({'bitsize': 32, 'bytesize': 4, 'masks': (16711680, 65280, 255, 0), 'shifts': (16, 8, 0, 0), 'losses': (0, 0, 0, 8), 'current_w': 1920, 'current_h': 1080, 'refresh_rate': 144, 'hw': False, 'wm': True, 'video_mem': 268435456, 'blit_hw': False, 'blit_hw_CC': False, 'blit_hw_A': False, 'blit_sw': False, 'blit_sw_CC': False, 'blit_sw_A': False})>
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
