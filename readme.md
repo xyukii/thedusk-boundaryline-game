@@ -1,6 +1,6 @@
 # 🌇 The Dusk Boundary Line
 
-_A narrative-driven indie game that explores burnout, emotional boundaries, and the fragile balance of adult life._
+_A narrative-driven indie game that explores burnout, emotional boundaries, and the fragile balance of adult life in office._
 
 ---
 
