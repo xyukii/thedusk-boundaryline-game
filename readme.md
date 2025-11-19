@@ -80,6 +80,7 @@ Every choice Arya makes carries emotional consequences—each decision pushing h
 ## 📞 Contact
 
 Project Link: [https://github.com/xyukii/thedusk-boundaryline-game](https://github.com/xyukii/thedusk-boundaryline-game)
+Support : [mailto:hafizhahmadalabror@student.telkomuniversity.ac.id?subject=Support%20Request%20of%20The%20Dusk%20Boundary%20Line] (Support E-Mail)
 
 ---
 
