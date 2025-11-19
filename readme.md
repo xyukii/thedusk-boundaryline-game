@@ -84,3 +84,36 @@ Project Link: [https://github.com/xyukii/thedusk-boundaryline-game](https://gith
 ---
 
 ⭐ Star this repository if you find it interesting!
+
+
+**GUI Customization**
+
+- **Files changed/added:**: `Main/game/screens.rpy` (main menu now uses image buttons) and `Main/game/screens_custom.rpy` (new helper screens `start_or_load` and `settings_menu`).
+- **Button images:**: The main menu uses the images in `gui/button/`:
+	- `play@2.png` — main "Mulai" image button
+	- `settings@2.png` — settings hub image button
+	- `quit@2.png` — quit image button
+
+- **Behavior summary:**: The `Mulai` button opens `start_or_load`, which offers "Mulai Baru" (Start New) and "Muat" (Load). The `Settings` button opens a hub that links to `preferences`, `about`, and `help`. The `Quit` button calls `Quit(confirm=True)` and will show Ren'Py's confirmation.
+
+- **How to change button images or add hover states:**
+	- Replace the files in `gui/button/` with your own art keeping the same filenames.
+	- If you want hover variants, add files with a consistent naming scheme and update `screens.rpy` to point `hover` to them (e.g. `play_hover.png`).
+
+- **Customizing labels or layout:**
+	- Edit `Main/game/screens.rpy` to adjust `xalign`, `yalign`, `spacing`, or wrap the menu in additional `frame`/`vbox` containers.
+	- `Main/game/screens_custom.rpy` contains the small helper screens; you can edit these to merge content into a single screen, convert links to transcluded content, or change button styles.
+
+- **Keeping in-game menus unchanged:**: No in-game menu screens (`game_menu`, `navigation`, quick menu, etc.) were altered; only the main menu layout was changed. All save/load/preferences functionality remains intact.
+
+- **Testing locally:**
+	- Open the Ren'Py launcher and run the project (select the folder `Main` in the launcher). From the main menu you should see the three image buttons. Click them to verify behavior.
+
+- **Revert or experiment safely:**
+	- If you want to keep the original main menu while experimenting, rename the file `Main/game/screens.rpy` to a backup (`screens.rpy.bak`) and copy the original back when needed, or version-control the branch.
+
+- **Next steps (optional):**
+	- Add hover/pressed image variants for more polish.
+	- Replace the settings hub links with transcluded content (tabs) if you prefer a single-screen settings experience.
+	- Add theme variables to `Main/game/gui.rpy` for tunable colors/sizes for easier customization by non-programmers.
+

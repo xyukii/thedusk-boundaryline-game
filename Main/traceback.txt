@@ -1,0 +1,21 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+renpy.script.LabelNotFound: could not find label 'settings_combined_screen'.
+
+-- Full Traceback ------------------------------------------------------------
+
+Traceback (most recent call last):
+  File "renpy/common/00gamemenu.rpy", line 177, in script
+    jump expression _game_menu_screen
+  File "renpy/ast.py", line 1928, in execute
+    rv = renpy.game.script.lookup(target)
+         ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "renpy/script.py", line 1161, in lookup
+    raise LabelNotFound(original)
+renpy.script.LabelNotFound: could not find label 'settings_combined_screen'.
+
+Windows-11-10.0.26100-SP0 AMD64
+Ren'Py 8.4.1.25072401
+The Dusk Boundary Line 1.0
+Thu Nov 20 06:28:30 2025

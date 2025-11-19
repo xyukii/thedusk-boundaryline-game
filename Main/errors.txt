@@ -1,0 +1,10 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/screens.rpy", line 18: style property screen is not known.
+    screen navigation():
+          ^
+
+Ren'Py Version: Ren'Py 8.4.1.25072401
+Thu Nov 20 05:39:27 2025
