@@ -42,9 +42,9 @@ Every choice Arya makes carries emotional consequences—each decision pushing h
 
 ## 🎯 Features
 
-- [ ] [Feature 1]
-- [ ] [Feature 2]
-- [ ] [Feature 3]
+- [Narrative Based Story]
+- [Easy Complexity Branching]
+- [Much More]
 
 ### Project Structure
 
