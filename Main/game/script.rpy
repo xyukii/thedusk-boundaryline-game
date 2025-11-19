@@ -4,6 +4,23 @@ define b = Character("Bima", color="#FF6347")
 define l = Character("Lina", color="#FFD700")
 define n = Character(None, what_color="#FFFFFF")
 
+label splashscreen:
+    call splash_screen
+    return
+
+# splash screen
+label splash_screen:
+    scene black
+    with Pause(1)
+
+    show text "Mojeng Presents" with dissolve
+    pause 2
+
+    hide text with dissolve
+    pause 1
+
+    return
+
 image arya happy = "images/char/arya_happy.png"
 image arya neutral = "images/char/arya_neutral.png"
 image arya stress = "images/char/arya_stress.png"
