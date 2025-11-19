@@ -2,7 +2,7 @@
 define a = Character("Arya", color="#87CEEB")
 define b = Character("Bima", color="#FF6347")
 define l = Character("Lina", color="#FFD700")
-define n = Character(None, what_color="#FFFFFF")
+define n = Character(None, what_color="#000000")
 
 label splashscreen:
     call splash_screen
@@ -11,9 +11,10 @@ label splashscreen:
 # splash screen
 label splash_screen:
     scene black
-    with Pause(1)
+    pause 1
 
-    show text "Mojeng Presents" with dissolve
+    show text "{size=40}{color=#FFFFFF}Mojeng Presents{/color}{/size}" at truecenter
+    with dissolve
     pause 2
 
     hide text with dissolve
