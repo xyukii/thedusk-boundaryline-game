@@ -1,6 +1,6 @@
 # 🌇 The Dusk Boundary Line
 
-_A narrative-driven indie game that explores burnout, emotional boundaries, and the fragile balance of adult life._
+_A narrative-driven indie game that explores burnout, emotional boundaries, and the fragile balance of adult life in office._
 
 ---
 
@@ -42,9 +42,9 @@ Every choice Arya makes carries emotional consequences—each decision pushing h
 
 ## 🎯 Features
 
-- [ ] [Feature 1]
-- [ ] [Feature 2]
-- [ ] [Feature 3]
+- [Narrative Based Story]
+- [Easy Complexity Branching]
+- [Much More]
 
 ### Project Structure
 
@@ -80,6 +80,8 @@ Every choice Arya makes carries emotional consequences—each decision pushing h
 ## 📞 Contact
 
 Project Link: [https://github.com/xyukii/thedusk-boundaryline-game](https://github.com/xyukii/thedusk-boundaryline-game)
+<br>
+Support: [Support E-Mail](mailto:hafizhahmadalabror@student.telkomuniversity.ac.id?subject=Support%20Request%20of%20The%20Dusk%20Boundary%20Line)
 
 ---
 

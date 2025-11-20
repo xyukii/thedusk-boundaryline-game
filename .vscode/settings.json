@@ -4,6 +4,7 @@
         "**/*.rpa": true,
         "**/*.rpymc": true,
         "**/cache/": true
+<<<<<<< HEAD
     },
     "twineTweeLanguage.project.create": false,
     "editor.tokenColorCustomizations": {
@@ -120,5 +121,7 @@
                 }
             }
         ]
+=======
+>>>>>>> master
     }
 }
