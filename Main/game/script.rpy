@@ -1,3 +1,6 @@
+init python:
+    renpy.music.register_channel("sfx")
+
 # -*- coding: utf-8 -*-
 define a = Character("Arya", color="#87CEEB")
 define b = Character("Bima", color="#FF6347")
@@ -47,23 +50,24 @@ image bg sunset_city = im.Scale("images/sunset_city.png", config.screen_width, c
 image bg office_window = im.Scale("images/office_window.png", config.screen_width, config.screen_height)
 
 label start:
+    play music "audio/music/dark_space_ambient.mp3" loop volume 0.3
     scene bg office_night with fade
     show arya stress at center
-    play sound "audio/music/angin.mp3" loop
-    n "Kantor sudah sepi. Jam hampir menunjukkan tengah malam."
-    play sound "audio/sfx/kibot.mp3" loop
+    play sfx "audio/sfx/angin.mp3" loop volume 0.1
+    n "Kantor sudah sepi. Jam hampir menunjukkan tengah malam"
+    play sfx "audio/sfx/kibot.mp3" loop
     n "Di antara deretan meja yang gelap, hanya satu layar monitor yang masih menyala — milik Arya, analis data berumur 28 tahun."
 
     a "Angka-angka ini kayak mimpi buruk yang nggak kelar-kelar."
-    stop sound
-    play sound "audio/sfx/notif.mp3"
+    stop sfx
+    play sfx "audio/sfx/notif.mp3" noloop
     n "(Notifikasi ponsel berbunyi.)"
-    stop sound
+    stop sfx
     show lina sad at left
     l "(Mas, besok batas bayar kos. Aku udah kehabisan cara, Mas…)"
     a "(Maaf, Lin… sebentar lagi selesai)."
 
-    show bima angry at right
+    show bima neutral at right
     b "Arya, tolong revisi data malam ini. Klien minta jam 6 pagi. Jangan tidur dulu."
     a "Seolah aku mesin yang nggak boleh berhenti."
 
@@ -79,6 +83,7 @@ label ep1_lembur:
     play sound "audio/sfx/kibot.mp3" loop
     n "Layar monitor perlahan redup, tapi matanya masih terbuka."
     n "Pagi datang tanpa sempat bermimpi."
+    stop sound
     hide arya
     jump episode2
 
@@ -92,15 +97,16 @@ label ep1_tidur:
 
 label episode2:
     scene bg office_morning with fade
-    show arya stress at center
+    show arya neutral at center
     n "Kopi ketiga belum juga mengusir kantuk."
+    play sfx "audio/sfx/yawn.wav" noloop
     n "Arya menghadiri rapat pagi dengan mata merah."
 
     show bima neutral at right
     b "Lumayan kerja kamu semalam. Tapi formatnya salah. Ulang lagi."
     a "Baik, Pak."
-    stop sound
-    play sound "audio/sfx/notif.mp3"
+    stop sfx
+    play sfx "audio/sfx/ringtone.mp3" loop volume 0.5
     n "(Telepon berdering. Nama 'Lina' muncul.)"
     show lina sad at left
     l "(Mas, aku diancam mau diusir hari ini!)"
@@ -109,10 +115,12 @@ label episode2:
 
     menu:
         "Angkat telepon dan bantu Lina":
+            stop sfx
             hide bima
             hide lina
             jump ep2_telpon
         "Abaikan telepon dan terus kerja":
+            stop sfx
             hide bima
             hide lina
             jump ep2_kerja
@@ -140,7 +148,7 @@ label ep2_kerja:
 
 label episode3:
     scene bg office_day with fade
-    show arya stress at center
+    show arya neutral at center
     stop sound
     play sound "audio/sfx/kibot.mp3" loop
     n "Hari berganti tanpa sadar. Arya hanya mengenal tiga hal: layar, kopi, dan tekanan."
@@ -151,8 +159,10 @@ label episode3:
     a "Pak, saya udah kerja tiga malam tanpa tidur…"
     b "Itu urusan kamu, bukan saya!"
 
+    play sfx "audio/sfx/ringtone.mp3" loop volume 0.5
     n "(Telepon lagi — Lina.)"
     show lina sad at left
+    stop sfx
     l "(Mas, Ibu pingsan! Aku di rumah sakit. Tolong datang!)"
 
     menu:
@@ -170,13 +180,15 @@ label episode3:
             jump ep3_rekam
 
 label ep3_rumahsakit:
-    scene bg hospital with fade
+
     show arya stress at center
     a "Maaf, Pak… tapi kali ini, aku nggak bisa tinggal diam."
+    play sfx "audio/sfx/running.mp3" noloop volume 0.3
     n "(Arya berlari keluar gedung, wajahnya basah oleh hujan.)"
     scene bg hospital with fade
     show lina sad at left
     l "Mas, aku takut banget…"
+    show arya neutral at center
     a "Tenang, Lin. Kita hadapi bareng."
     hide lina
     hide arya
@@ -185,7 +197,9 @@ label ep3_rumahsakit:
 label ep3_kantor:
     show arya stress at center
     a "Kerja ini… nggak sepadan dengan yang hilang."
+    play sound "audio/sfx/notif.mp3" 
     n "(Pesan masuk: 'Mas… Ibu di UGD.')"
+    stop sound
     hide lina
     hide arya
     jump episode4
@@ -201,7 +215,10 @@ label ep3_rekam:
 label episode4:
     scene bg office_meeting with fade
     n "Hari itu, semua meledak."
-    show arya stress at center
+    show arya neutral at center
+    stop sfx
+    play sfx "audio/sfx/table_slams.mp3" noloop volume 2
+    n "(Boss membentak meja.)"
     show bima angry at right
     b "Kamu pikir kamu siapa?! Kamu bikin klien marah besar!"
     n "Karyawan lain terdiam. Arya menatap kosong."
@@ -228,10 +245,15 @@ label episode4:
 
 
 label route_berani:
-    show arya neutral at center
+    show arya stress at center
+    n "(Seketika Arya pun membalas.)"
+    play sfx "audio/sfx/table_slams.mp3" noloop volume 2
     a "Selama ini saya kerja siang malam! Tapi Bapak nggak pernah lihat!"
     show bima angry at right
     b "Karena kamu gagal!"
+    play sfx "audio/sfx/ludah.mp3" noloop volume 2
+    n "(Arya meludah ke lantai.)"
+    stop sfx
     a "Mungkin gagal jadi budak, iya."
     b "Kamu dipecat!"
     a "Terima kasih. Akhirnya saya bebas juga."
