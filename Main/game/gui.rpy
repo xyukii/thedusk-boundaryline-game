@@ -25,35 +25,31 @@ define config.check_conflicting_properties = True
 ##
 ## Warna text pada antarmuka.
 
-## Warna aksen yang digunakan sepanjang interface sampai pewarnaan text.
-define gui.accent_color = '#ffffff'
+## Accent color used for highlights (sliders, selected items)
+define gui.accent_color = '#0060b7'    # bright navy-blue highlight
 
-## Warna yang di gunakan untuk warna tombol text jika di pilih atau di tekan.
-define gui.idle_color = '#888888'
+## Default text color for idle buttons
+define gui.idle_color = '#1a1a1a'      # dark gray (softer than full black)
 
-## Warna kecil yang di gunakan untuk text kecil, yang membutuhkan lebih terang/
-## lebih gelap untuk mencapai efek yang sama
-define gui.idle_small_color = '#aaaaaa'
+## Small text color (subtitles, tiny labels)
+define gui.idle_small_color = '#3a3a3a'
 
-## Warna yang di gunakan untuk tombol dan bar yang di pilih.
-define gui.hover_color = '#dadada'
+## Hover color for buttons
+define gui.hover_color = '#004a8f'     # darker blue hover, clearly visible
 
-## Warna yang digunakan untuk text tombol ketika di pijit tapi tidak di fokus.
-## Tombol di pilih jika terdapat di layar saat ini atau value preferensi.
-define gui.selected_color = '#ffffff'
+## Color of text on selected buttons or active items
+define gui.selected_color = '#002a57'  # deep navy (matches your slider fill)
 
-## Warna yang di gunakan untuk tombol text ketika tidak bisa di pilih.
+## Disabled/unselectable text color
 define gui.insensitive_color = '#8888887f'
 
-## Warna yang di gunakan untuk beberapa bagian dari bar yang tidak terisi. Ini
-## tidak di gunakan secara langsung, Tapi di gunakan ketika me regenerasi file
-## gambar bar.
-define gui.muted_color = '#9e9e9e'
-define gui.hover_muted_color = '#c7c7c7'
+## Bar background (empty part of slider)
+define gui.muted_color = '#a0a0a0'     # soft gray, readable on cream bg
+define gui.hover_muted_color = '#bcbcbc'
 
-## Warna yang di gunakan untuk dialog dan text pilihan menu.
-define gui.text_color = '#ffffff'
-define gui.interface_text_color = '#ffffff'
+## Dialogue & interface text
+define gui.text_color = '#000000'              # body text
+define gui.interface_text_color = '#000000'    # menu text
 
 
 ## Font dan ukuran Font ########################################################
@@ -211,8 +207,8 @@ define gui.choice_button_borders = Borders(150, 8, 150, 8)
 define gui.choice_button_text_font = gui.text_font
 define gui.choice_button_text_size = gui.text_size
 define gui.choice_button_text_xalign = 0.5
-define gui.choice_button_text_idle_color = '#888888'
-define gui.choice_button_text_hover_color = "#ffffff"
+define gui.choice_button_text_idle_color = '#525252'
+define gui.choice_button_text_hover_color = "#5c5c5c"
 define gui.choice_button_text_insensitive_color = '#8888887f'
 
 

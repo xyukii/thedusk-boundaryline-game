@@ -402,6 +402,12 @@ style main_menu_text:
 
 style main_menu_title:
     properties gui.text_properties("title")
+    # Teks akan menjadi Putih Penuh (#FFFFFF)
+    color "#FFFFFF"
+    
+    # Properti ini (outlines) membuat teks tetap terlihat jelas
+    # di atas gambar. Pertahankan jika ada, atau tambahkan jika perlu:
+    # outlines [ (absolute(2), "#000000", absolute(0), absolute(0)) ]
 
 style main_menu_version:
     properties gui.text_properties("version")
@@ -499,7 +505,10 @@ style game_menu_label is gui_label
 style game_menu_label_text is gui_label_text
 
 style return_button is navigation_button
-style return_button_text is navigation_button_text
+style return_button_text is navigation_button_text:
+    # Mengoverride jika masih gelap
+    idle_color "#FFFFFF" 
+    hover_color "#87CEEB"
 
 style game_menu_outer_frame:
     bottom_padding 45

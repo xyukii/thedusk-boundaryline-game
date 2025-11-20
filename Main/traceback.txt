@@ -1,0 +1,33 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 235, in script
+    if BuktiTerkumpul:
+  File "game/script.rpy", line 235, in <module>
+    if BuktiTerkumpul:
+       ^^^^^^^^^^^^^^ 
+NameError: name 'BuktiTerkumpul' is not defined
+
+-- Full Traceback ------------------------------------------------------------
+
+Traceback (most recent call last):
+  File "game/script.rpy", line 235, in script
+    if BuktiTerkumpul:
+  File "renpy/ast.py", line 2079, in execute
+    if renpy.python.py_eval(condition):
+       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^ 
+  File "renpy/python.py", line 1292, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/python.py", line 1285, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "game/script.rpy", line 235, in <module>
+    if BuktiTerkumpul:
+       ^^^^^^^^^^^^^^ 
+NameError: name 'BuktiTerkumpul' is not defined
+
+Windows-11-10.0.26200-SP0 AMD64
+Ren'Py 8.4.1.25072401
+The Dusk Boundary Line 1.5
+Thu Nov 20 08:24:24 2025
