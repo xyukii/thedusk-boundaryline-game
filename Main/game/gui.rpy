@@ -2,7 +2,7 @@
 ## Inisialisasi
 ################################################################################
 
-## pernyataan offset init menyebabkan pernyataan inisialisasi di file ini untuk
+## Pernyataan offset init menyebabkan pernyataan inisialisasi di file ini untuk
 ## berjalan lebih dahulu daripada pernyataan init di file lain nya.
 init offset = -2
 
@@ -24,36 +24,33 @@ define config.check_conflicting_properties = True
 ## Warna #######################################################################
 ##
 ## Warna text pada antarmuka.
+## (INTEGRASI: Menggunakan skema warna BIRU/NAVY dari GUI Lama)
 
-## Warna aksen yang digunakan sepanjang interface sampai pewarnaan text.
-define gui.accent_color = '#ffffff'
+## Warna aksen (digunakan untuk highlight, slider, item terpilih)
+define gui.accent_color = '#0060b7'     # Bright navy-blue (LAMA)
 
-## Warna yang di gunakan untuk warna tombol text jika di pilih atau di tekan.
-define gui.idle_color = '#888888'
+## Warna text default untuk tombol yang sedang diam (idle)
+define gui.idle_color = '#1a1a1a'       # Dark gray, lebih tegas (LAMA)
 
-## Warna kecil yang di gunakan untuk text kecil, yang membutuhkan lebih terang/
-## lebih gelap untuk mencapai efek yang sama
-define gui.idle_small_color = '#aaaaaa'
+## Warna text kecil (subtitle, label kecil)
+define gui.idle_small_color = '#3a3a3a' # (LAMA)
 
-## Warna yang di gunakan untuk tombol dan bar yang di pilih.
-define gui.hover_color = '#dadada'
+## Warna hover untuk tombol (saat mouse di atasnya)
+define gui.hover_color = '#004a8f'      # Darker blue hover (LAMA)
 
-## Warna yang digunakan untuk text tombol ketika di pijit tapi tidak di fokus.
-## Tombol di pilih jika terdapat di layar saat ini atau value preferensi.
-define gui.selected_color = '#ffffff'
+## Warna text pada tombol yang dipilih atau item aktif
+define gui.selected_color = '#002a57'   # Deep navy (LAMA)
 
-## Warna yang di gunakan untuk tombol text ketika tidak bisa di pilih.
+## Warna text yang tidak bisa dipilih (disabled)
 define gui.insensitive_color = '#8888887f'
 
-## Warna yang di gunakan untuk beberapa bagian dari bar yang tidak terisi. Ini
-## tidak di gunakan secara langsung, Tapi di gunakan ketika me regenerasi file
-## gambar bar.
-define gui.muted_color = '#9e9e9e'
-define gui.hover_muted_color = '#c7c7c7'
+## Latar belakang Bar (bagian kosong dari slider)
+define gui.muted_color = '#a0a0a0'      # Soft gray (LAMA)
+define gui.hover_muted_color = '#bcbcbc'
 
-## Warna yang di gunakan untuk dialog dan text pilihan menu.
-define gui.text_color = '#ffffff'
-define gui.interface_text_color = '#ffffff'
+## Warna Dialog & Text Antarmuka
+define gui.text_color = '#000000'           # Hitam pekat (LAMA)
+define gui.interface_text_color = '#000000' # Menu text hitam (LAMA)
 
 
 ## Font dan ukuran Font ########################################################
@@ -89,8 +86,8 @@ define gui.title_text_size = 75
 ## Menu utama dan Menu permainan. ##############################################
 
 ## Gambar yang di gunakan untuk Menu utama dan Menu permainan.
-define gui.main_menu_background = "gui/main_menu.png"
-define gui.game_menu_background = "gui/game_menu.png"
+define gui.main_menu_background = "gui/background_menu.png"
+define gui.game_menu_background = "gui/main_menu_background.png"
 
 
 ## Dialog ######################################################################
@@ -110,7 +107,7 @@ define gui.textbox_yalign = 1.0
 define gui.name_xpos = 360
 define gui.name_ypos = 0
 
-## Penempatan  horizontal nama karakter. Ini dapat berupa 0.0 untuk rata kiri,
+## Penempatan horizontal nama karakter. Ini dapat berupa 0.0 untuk rata kiri,
 ## 0.5 untuk rata tengah, dan 1.0 untuk rata kanan. 
 define gui.name_xalign = 0.0
 
@@ -136,7 +133,7 @@ define gui.dialogue_ypos = 75
 ## Lebar maximum dari dialog text, dalam pixel.
 define gui.dialogue_width = 1116
 
-## rata tengah dari text dialog. Ini dapat berisi 0.0 untuk rata kiri, atau 0.5
+## Rata tengah dari text dialog. Ini dapat berisi 0.0 untuk rata kiri, atau 0.5
 ## untuk tengah, dan 1.0 untuk kanan.
 define gui.dialogue_text_xalign = 0.0
 
@@ -200,9 +197,10 @@ define gui.quick_button_text_selected_color = gui.accent_color
 # define gui.navigation_button_width = 250
 
 
-## Tombol Pilihan ##############################################################
+## Tombol Pilihan (Choice Buttons) #############################################
 ##
 ## Choice buttons are used in the in-game menus.
+## (INTEGRASI: Menggunakan warna text dari GUI Lama agar terbaca jelas)
 
 define gui.choice_button_width = 1185
 define gui.choice_button_height = None
@@ -211,8 +209,8 @@ define gui.choice_button_borders = Borders(150, 8, 150, 8)
 define gui.choice_button_text_font = gui.text_font
 define gui.choice_button_text_size = gui.text_size
 define gui.choice_button_text_xalign = 0.5
-define gui.choice_button_text_idle_color = '#888888'
-define gui.choice_button_text_hover_color = "#ffffff"
+define gui.choice_button_text_idle_color = '#525252'      # Abu gelap (LAMA)
+define gui.choice_button_text_hover_color = "#5c5c5c"     # Abu sedikit terang (LAMA)
 define gui.choice_button_text_insensitive_color = '#8888887f'
 
 

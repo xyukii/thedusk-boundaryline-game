@@ -30,9 +30,17 @@ define config.version = "1.0"
 ## tanda kutip tiga, dan biarkan baris kosong di antara paragraf.
 
 define gui.about = _p("""
+{b}THE DUSK BOUNDARY LINE{/b}
+Sebuah Visual Novel tentang dilema moral dan kerasnya kehidupan.
+
+{b}CREDITS:{/b}
+Story & Direction: Mojeng
+Art & Design: Mojeng Studio
+Music: Kevin MacLeod & YouTube Audio Library
+
+Terima kasih telah memainkan game ini. 
+Dukungan kalian sangat berarti bagi pengembang indie seperti saya.
 """)
-
-
 ## Nama pendek permainan yang di gunakan untuk executable dan direktori di
 ## bangunan distribusi. Ini harus hanya berisi karakter ASCII-saja, dan tidak
 ## boleh mengandung  spasi, koma, atau kutip.
