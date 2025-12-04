@@ -1,0 +1,34 @@
+# Cache & temporary files
+*.tmp
+*.bak
+*.log
+
+# Ren'Py auto-generated folders
+/cache/
+/log/
+/tl/
+/_error.txt
+/_lint.txt
+
+# Build & distribution (opsional: jika kamu build game di lokal)
+/game/saves/
+/game/screenshots/
+/game/persistent/
+
+# Konfigurasi lokal pengguna
+/renpy/  # jika kamu menyalin engine Ren'Py ke dalam proyek
+/lib/    # jika ada symlink/lib lokal
+
+# File dari Ren'Py Launcher / SDK
+/launcher.ini
+/preferences
+
+# Direktori build otomatis (jika pakai Ren'Py build tools)
+/tmp/
+/build/
+
+# Sistem file macOS
+.DS_Store
+
+# Sistem file Windows
+Thumbs.db
