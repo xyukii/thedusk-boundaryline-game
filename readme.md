@@ -33,7 +33,7 @@ Every choice Arya makes carries emotional consequences—each decision pushing h
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### Software Usage Lists
 
 - [Twine](https://twinery.org/)
 - [Renpy](https://www.renpy.org/)
