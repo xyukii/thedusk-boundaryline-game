@@ -23,7 +23,7 @@ define gui.show_name = True
 
 ## Versi Permainan.
 
-define config.version = "1.0"
+define config.version = "1.5"
 
 
 ## Teks yang ditempatkan pada layar tentang game. Tempatkan teks di antara
@@ -63,7 +63,7 @@ define config.has_voice = True
 ## dimainkan sampai permainan di mulai, sampai di hentikan atau file lain di
 ## mainkan.
 
-# define config.main_menu_music = "main-menu-theme.ogg"
+# define config.main_menu_music = "/audio/music/kayak.mp3"
 
 
 ## Transisi ####################################################################
@@ -162,7 +162,8 @@ define config.window_icon = "gui/window_icon.png"
 ## distribusi.
 
 init python:
-
+    renpy.music.register_channel("sfx", "music")
+    #config.main_menu_music = "/audio/music/kayak.mp3"
     ## Fungsi berikut mengambil pola file. Pola file merupakan case-
     ## insensitiv, dan sama dengan arah direktori dasar, dengan atau tanpa
     ## awalan /. Jika banyak pola sama, yang pertama yang akan di gunakan.

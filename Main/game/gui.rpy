@@ -25,32 +25,42 @@ define config.check_conflicting_properties = True
 ##
 ## Warna text pada antarmuka.
 
+# Palet Dasar
+define gui.cream_bg = '#f5f5f0'        # Latar belakang dasar yang lembut (soft off-white)
+define gui.dark_text = '#2c2c2c'      # Teks utama, lebih lembut dari hitam
+define gui.mid_gray = '#606060'        # Teks kecil/subtle
+
+# Accent color - Mempertahankan warna utama biru Anda
+define gui.accent_primary = '#0060b7' # Biru utama (main highlight color)
+define gui.accent_dark = '#004a8f'    # Biru yang lebih gelap (hover color)
+define gui.accent_deep = '#002a57'    # Biru terdalam (selected/active color)
+define gui.accent_light = '#84b2e8'   # Biru yang lebih terang (for soft bars/muted selection)
+
 ## Accent color used for highlights (sliders, selected items)
-define gui.accent_color = '#0060b7'    # bright navy-blue highlight
+define gui.accent_color = gui.accent_primary
 
 ## Default text color for idle buttons
-define gui.idle_color = '#1a1a1a'      # dark gray (softer than full black)
+define gui.idle_color = gui.dark_text
 
 ## Small text color (subtitles, tiny labels)
-define gui.idle_small_color = '#3a3a3a'
+define gui.idle_small_color = gui.mid_gray
 
 ## Hover color for buttons
-define gui.hover_color = '#004a8f'     # darker blue hover, clearly visible
+define gui.hover_color = gui.accent_dark
 
 ## Color of text on selected buttons or active items
-define gui.selected_color = '#002a57'  # deep navy (matches your slider fill)
+define gui.selected_color = gui.accent_deep # Teks pada tombol yang dipilih (deep navy)
 
 ## Disabled/unselectable text color
-define gui.insensitive_color = '#8888887f'
+define gui.insensitive_color = '#a9a9a97f' # Abu-abu yang lebih lembut untuk disabled
 
 ## Bar background (empty part of slider)
-define gui.muted_color = '#a0a0a0'     # soft gray, readable on cream bg
-define gui.hover_muted_color = '#bcbcbc'
+define gui.muted_color = '#cccccc'    # Abu-abu yang jelas untuk bar background
+define gui.hover_muted_color = '#b0b0b0'
 
 ## Dialogue & interface text
-define gui.text_color = '#000000'              # body text
-define gui.interface_text_color = '#000000'    # menu text
-
+define gui.text_color = gui.dark_text        # Teks dialog
+define gui.interface_text_color = gui.dark_text # Teks menu
 
 ## Font dan ukuran Font ########################################################
 
@@ -85,6 +95,9 @@ define gui.title_text_size = 75
 ## Menu utama dan Menu permainan. ##############################################
 
 ## Gambar yang di gunakan untuk Menu utama dan Menu permainan.
+# Anggap bahwa gambar latar belakang (main_menu.png dan game_menu.png)
+# berfungsi dengan skema warna baru. Jika Anda ingin latar belakang polos,
+# Anda dapat menentukannya di screens.rpy.
 define gui.main_menu_background = "gui/main_menu.png"
 define gui.game_menu_background = "gui/game_menu.png"
 
@@ -106,7 +119,7 @@ define gui.textbox_yalign = 1.0
 define gui.name_xpos = 360
 define gui.name_ypos = 0
 
-## Penempatan  horizontal nama karakter. Ini dapat berupa 0.0 untuk rata kiri,
+## Penempatan horizontal nama karakter. Ini dapat berupa 0.0 untuk rata kiri,
 ## 0.5 untuk rata tengah, dan 1.0 untuk rata kanan. 
 define gui.name_xalign = 0.0
 
@@ -186,8 +199,8 @@ define gui.page_button_borders = Borders(15, 6, 15, 6)
 
 define gui.quick_button_borders = Borders(15, 6, 15, 0)
 define gui.quick_button_text_size = 21
-define gui.quick_button_text_idle_color = gui.idle_small_color
-define gui.quick_button_text_selected_color = gui.accent_color
+define gui.quick_button_text_idle_color = gui.mid_gray # Diubah ke mid_gray
+define gui.quick_button_text_selected_color = gui.accent_primary # Diubah ke accent_primary
 
 ## Anda juga dapat menambahkan kustomisasi Anda sendiri, dengan menambahkan
 ## variabel yang diberi nama yang tepat. Sebagai contoh, Anda dapat menghapus
@@ -207,9 +220,9 @@ define gui.choice_button_borders = Borders(150, 8, 150, 8)
 define gui.choice_button_text_font = gui.text_font
 define gui.choice_button_text_size = gui.text_size
 define gui.choice_button_text_xalign = 0.5
-define gui.choice_button_text_idle_color = '#525252'
-define gui.choice_button_text_hover_color = "#5c5c5c"
-define gui.choice_button_text_insensitive_color = '#8888887f'
+define gui.choice_button_text_idle_color = gui.dark_text # Diubah ke dark_text
+define gui.choice_button_text_hover_color = gui.accent_dark # Diubah ke accent_dark
+define gui.choice_button_text_insensitive_color = gui.insensitive_color
 
 
 ## Tombol Slot File ############################################################
@@ -224,8 +237,8 @@ define gui.slot_button_height = 309
 define gui.slot_button_borders = Borders(15, 15, 15, 15)
 define gui.slot_button_text_size = 21
 define gui.slot_button_text_xalign = 0.5
-define gui.slot_button_text_idle_color = gui.idle_small_color
-define gui.slot_button_text_selected_idle_color = gui.selected_color
+define gui.slot_button_text_idle_color = gui.mid_gray # Diubah ke mid_gray
+define gui.slot_button_text_selected_idle_color = gui.accent_deep # Diubah ke accent_deep
 define gui.slot_button_text_selected_hover_color = gui.hover_color
 
 ## Lebar dan tinggi gambar mini yang digunakan oleh slot penyimpanan.

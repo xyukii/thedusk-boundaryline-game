@@ -1,14 +1,100 @@
-# -*- coding: utf-8 -*-
-define a = Character("Arya", color="#87CEEB")
-define b = Character("Bima", color="#FF6347")
-define l = Character("Lina", color="#FFD700")
-define n = Character(None, what_color="#000000")
+# ==============================================================================
+# 1. INIT: KONFIGURASI UMUM & STYLE MENU
+# ==============================================================================
 
+# Inisialisasi Python untuk mendaftarkan channel audio "sfx"
+init python:
+    # Mendaftarkan channel khusus untuk Sound Effects
+    renpy.music.register_channel("sfx", mixer="sfx", loop=False)
+
+# --- Definisi Screen Menu Pilihan (Baru) ---
+screen choice(items):
+    style_prefix "choice"
+
+    vbox:
+        xalign 0.5
+        yalign 0.5
+        spacing 20
+
+        for i in items:
+            textbutton i.caption:
+                action i.action
+                style "choice_button"
+
+# --- Style Menu Pilihan (Baru) ---
+style choice_vbox:
+    xalign 0.5
+    yalign 0.5
+
+style choice_button is button:
+    # Ukuran & Layout
+    xsize 800
+    ysize 80
+    xalign 0.5
+    yalign 0.5
+    padding (50, 15)
+    
+    # WARNA TOMBOL (Solid Color - Anti Error Gambar Hilang)
+    # Idle: Abu gelap transparan
+    background Solid("#263238cc") 
+    # Hover: Abu terang solid (lebih jelas saat disentuh)
+    hover_background Solid("#546e7add") 
+
+style choice_button_text is text:
+    xalign 0.5
+    yalign 0.5
+    text_align 0.5
+    size 30
+    
+    color "#eceff1"      # Putih tulang
+    hover_color "#ffd740"    # Kuning emas saat disentuh
+    outlines [(2, "#00000044", 1, 1)] # Shadow teks halus
+
+# ==============================================================================
+# 2. DEFINISI KARAKTER, VARIABEL & ASET
+# ==============================================================================
+
+# --- Karakter (Baru) ---
+define b = Character("Bima", color="#81d4fa", who_bold=True) # Biru Muda (Protagonis)
+define h = Character("Pak Hartono", color="#ef5350", who_bold=True) # Merah (Antagonis)
+define r = Character("Rina", color="#fff176") # Kuning Soft (Adik)
+define n = Character(None, what_color="#000000", what_italic=True) # Narator
+
+# --- Variabel Sistem Poin (Baru) ---
+default mental_bima = 0    
+default family_bond = 0    
+
+# --- ASET GAMBAR KARAKTER (Diperbarui dengan path baru) ---
+# Catatan: Ren'Py akan menggunakan file di folder images/char/ dengan nama yang sesuai.
+image bima lelah = "images/char/arya_neutral.png"
+image bima tegas = "images/char/arya_happy.png"
+image bima marah = "images/char/arya_stress.png"
+
+image hartono marah = "images/char/bima_angry.png"
+image hartono dingin = "images/char/bima_neutral.png"
+
+image rina cemas = "images/char/lina_sad.png"
+image rina senyum = "images/char/lina_happy.png"
+image rina nangis = "images/char/lina_sad.png"
+
+# --- ASET GAMBAR LATAR BELAKANG (Diperbarui dengan path baru) ---
+# im.Scale dihapus agar Ren'Py menggunakan penyesuaian skala default.
+image bg kamar = im.Scale("images/office_newday.png", config.screen_width, config.screen_height)
+image bg kantor = im.Scale("images/office_day.png", config.screen_width, config.screen_height)
+image bg kantor_malam = im.Scale("images/office_night.png", config.screen_width, config.screen_height)
+image bg rumah_sakit = im.Scale("images/hospital.png", config.screen_width, config.screen_height)
+image bg hujan_jalan = im.Scale("images/rain_street.png", config.screen_width, config.screen_height)
+
+# --- Efek Visual ---
+define flash = Fade(0.1, 0.0, 0.5, color="#fff") 
+define slow_dissolve = Dissolve(2.0)
+define heart_beat = Fade(0.05, 0.05, 0.05, color="#000")
+
+# --- Splash Screen Tetap Ada ---
 label splashscreen:
     call splash_screen
     return
 
-# splash screen
 label splash_screen:
     scene black
     pause 1
@@ -22,277 +108,320 @@ label splash_screen:
 
     return
 
-image arya happy = "images/char/arya_happy.png"
-image arya neutral = "images/char/arya_neutral.png"
-image arya stress = "images/char/arya_stress.png"
-image bima angry = "images/char/bima_angry.png"
-image bima neutral = "images/char/bima_neutral.png"
-image girl = "images/char/girl.png"
-image lina happy = "images/char/lina_happy.png"
-image lina sad = "images/char/lina_sad.png"
-image mom happy = "images/char/mom_happy.png"
-image mom neutral = "images/char/mom_neutral.png"
-
-# Backgrounds - scale to screen size so they fill the whole screen
-# Using config.screen_width / config.screen_height ensures they fit default window size.
-image bg office_night = im.Scale("images/office_night.png", config.screen_width, config.screen_height)
-image bg office_morning = im.Scale("images/office_morning.png", config.screen_width, config.screen_height)
-image bg office_day = im.Scale("images/office_day.png", config.screen_width, config.screen_height)
-image bg office_meeting = im.Scale("images/office_meeting.png", config.screen_width, config.screen_height)
-image bg office_newday = im.Scale("images/office_newday.png", config.screen_width, config.screen_height)
-image bg rain_street = im.Scale("images/rain_street.png", config.screen_width, config.screen_height)
-image bg hospital = im.Scale("images/hospital.png", config.screen_width, config.screen_height)
-image bg bus_night = im.Scale("images/bus_night.png", config.screen_width, config.screen_height)
-image bg sunset_city = im.Scale("images/sunset_city.png", config.screen_width, config.screen_height)
-image bg office_window = im.Scale("images/office_window.png", config.screen_width, config.screen_height)
+# ==============================================================================
+# 3. CERITA UTAMA (FULL STORY - MASTERPIECE VERSION)
+# ==============================================================================
 
 label start:
-    scene bg office_night with fade
-    show arya stress at center
-    play sound "audio/music/angin.mp3" loop
-    n "Kantor sudah sepi. Jam hampir menunjukkan tengah malam."
-    play sound "audio/sfx/kibot.mp3" loop
-    n "Di antara deretan meja yang gelap, hanya satu layar monitor yang masih menyala — milik Arya, analis data berumur 28 tahun."
+    # Pastikan variabel direset untuk game baru
+    $ mental_bima = 0
+    $ family_bond = 0
+    play music "audio/music/dark_space_ambient.mp3" loop volume 0.3 # Menggunakan musik default lama
 
-    a "Angka-angka ini kayak mimpi buruk yang nggak kelar-kelar."
-    stop sound
-    play sound "audio/sfx/notif.mp3"
-    n "(Notifikasi ponsel berbunyi.)"
-    stop sound
-    show lina sad at left
-    l "(Mas, besok batas bayar kos. Aku udah kehabisan cara, Mas…)"
-    a "(Maaf, Lin… sebentar lagi selesai)."
+    # --- SCENE 1: PAGI YANG BERAT ---
+    scene black
+    # play sfx "audio/sfx/notif.mp3" # Jika ada sfx alarm
+    
+    n "Jakarta, 05:30 WIB."
+    n "Alarm itu berbunyi lagi. Suaranya seperti palu godam yang menghantam kepala setiap subuh."
 
-    show bima angry at right
-    b "Arya, tolong revisi data malam ini. Klien minta jam 6 pagi. Jangan tidur dulu."
-    a "Seolah aku mesin yang nggak boleh berhenti."
-
+    scene bg kamar with slow_dissolve
+    show bima lelah at center with dissolve
+    
+    b "(Menghela napas berat) Hah... Badan rasanya remuk. Padahal baru merem 3 jam."
+    b "Apa gue izin sakit aja ya hari ini? Bilang tifus kek..."
+    
+    # [CHOICE 1: MENENTUKAN MENTAL AWAL]
     menu:
-        "Tetap kerja lembur sampai pagi":
-            jump ep1_lembur
-        "Matikan laptop dan istirahat":
-            jump ep1_tidur
+        "Suara hati kecil Bima berkata..."
 
-label ep1_lembur:
-    show arya neutral at center
-    a "Udah biasa kok. Nanti bisa istirahat setelah ini…"
-    play sound "audio/sfx/kibot.mp3" loop
-    n "Layar monitor perlahan redup, tapi matanya masih terbuka."
-    n "Pagi datang tanpa sempat bermimpi."
-    hide arya
-    jump episode2
+        "Paksa bangun. Tagihan tidak bisa nunggu.":
+            $ mental_bima += 1
+            $ renpy.notify("Mental Bima: Fokus (+1)")
+            
+            b "(Menepuk pipi sendiri) Nggak. Nggak bisa. Tagihan RS Ibu bulan ini belum lunas. PayLater Rina juga."
+            b "Ayo Bim. Gerak. Jangan manja."
 
-label ep1_tidur:
-    show arya neutral at center
-    a "Udah cukup. Aku butuh tidur… bukan lagi angka."
-    n "Ia menatap langit malam. Tidak ada bintang — hanya dirinya sendiri."
-    hide arya
-    jump episode2
+        "Maki-maki nasib. Rasanya ingin menyerah.":
+            $ mental_bima -= 1
+            $ renpy.notify("Mental Bima: Tertekan (-1)")
+            
+            b "Bangsat... Kenapa sih hidup gue gini amat? Orang lain tidur enak, gue kayak sapi perah."
+            n "Bima bangun dengan aura gelap. Energi negatif sudah menumpuk sejak mata terbuka."
 
-
-label episode2:
-    scene bg office_morning with fade
-    show arya stress at center
-    n "Kopi ketiga belum juga mengusir kantuk."
-    n "Arya menghadiri rapat pagi dengan mata merah."
-
-    show bima neutral at right
-    b "Lumayan kerja kamu semalam. Tapi formatnya salah. Ulang lagi."
-    a "Baik, Pak."
-    stop sound
-    play sound "audio/sfx/notif.mp3"
-    n "(Telepon berdering. Nama 'Lina' muncul.)"
-    show lina sad at left
-    l "(Mas, aku diancam mau diusir hari ini!)"
-
-    b "Arya! Matikan HP! Fokus dulu, ini rapat penting!"
-
+    # --- MASUK RINA ---
+    show bima lelah:
+        xalign 0.8
+    show rina cemas at left with moveinleft
+    
+    r "Mas Bima? Mas kok pucet banget? Mas belum sarapan kan?"
+    b "Nggak sempet, Dek. Si Hartono minta revisi jam 8 teng. Telat dikit, kepala Mas taruhannya."
+    r "Mas... Ibu semalam nanyain Mas terus pas sadar. Katanya Mas janji mau nemenin kontrol hari ini."
+    
+    # [CHOICE 2: MENENTUKAN HUBUNGAN KELUARGA]
     menu:
-        "Angkat telepon dan bantu Lina":
-            hide bima
-            hide lina
-            jump ep2_telpon
-        "Abaikan telepon dan terus kerja":
-            hide bima
-            hide lina
-            jump ep2_kerja
+        "Rina menagih janji. Bima sedang stress berat. Responnya?"
 
-label ep2_telpon:
-    show arya neutral at center
-    a "Pak, maaf. Saya harus angkat telepon sebentar."
-    show bima angry at right
-    b "Kalau keluar ruangan, jangan balik lagi!"
-    n "Kadang, memilih orang yang kamu sayang artinya kehilangan dunia lain."
+        "Tatap matanya, minta maaf tulus (Prioritas Keluarga).":
+            $ family_bond += 1
+            $ renpy.notify("Hubungan Keluarga: Erat (+1)")
+            
+            b "(Melembutkan suara) Maafin Mas ya, Dek. Mas janji, kelar proyek ini, Mas ganti waktu yang ilang."
+            
+            show rina senyum at left
+            r "Janji ya, Mas? Yaudah hati-hati. Ini bekal rotinya dibawa."
+            n "Rina sedikit lega. Ada setitik harapan di matanya."
+
+        "Ngegas/Marah karena merasa ditekan (Prioritas Ego).":
+            $ family_bond -= 1
+            $ renpy.notify("Hubungan Keluarga: Renggang (-1)")
+            
+            b "Dek, ngertiin dikit napa?! Mas kerja banting tulang buat siapa?! Jangan nambah beban pikiran deh pagi-pagi!"
+            
+            show rina nangis at left
+            r "..."
+            n "Rina mundur selangkah, kaget dibentak. Bima langsung menyesal, tapi gengsinya terlalu tinggi untuk minta maaf."
+
+    hide rina
     hide bima
-    hide arya
-    jump episode3
+    with dissolve
+    
+    n "Bima berangkat menembus macetnya Jakarta. Langit mendung pekat, seolah tahu badai akan datang menimpa hidupnya hari ini."
 
-label ep2_kerja:
-    show arya neutral at center
-    a "Maaf, Lin…"
-    show lina sad at left
-    l "Iya, Mas. Nggak apa."
-    n "Tapi nada suaranya tidak lagi sama."
-    hide lina
-    hide arya
-    jump episode3
+    # --- SCENE 2: KANTOR NERAKA ---
+    scene bg kantor with fade
+    # play sfx "audio/sfx/kibot.mp3" loop # Jika ada sfx keyboard
+    
+    n "Jam 10:00. Ruangan Divisi Kreatif hening mencekam. Aura pembunuh terasa di udara."
 
+    show bima lelah at left
+    show hartono marah at right with vpunch # Layar getar
+    
+    # stop sfx
+    
+    h "BIMA! SINI KAMU!"
+    b "I-iya, Pak?"
+    h "Ini desain apaan?! Hah?! Saya minta konsep 'Elegan', kenapa kamu kasih sampah warna-warni kayak brosur sedot WC gini?!"
+    h "Kamu lulusan desain beneran bukan sih?! Anak magang aja kerjanya lebih becus dari kamu!"
+    
+    b "Tapi Pak, kemarin Bapak sendiri yang bilang referensinya..."
+    h "JANGAN JAWAB! Salah ya salah! Rombak total! Saya nggak mau tau, besok pagi harus ada di meja saya."
+    h "Kalau nggak... SP 3 turun. Silakan kamu angkat kaki dari sini dan bawa kardusmu."
+    
+    hide hartono with moveoutright
+    n "Pak Hartono membanting pintu ruangan. Bima terpaku di tengah kantor. Harga dirinya serasa diludahi di depan rekan kerjanya."
 
-label episode3:
-    scene bg office_day with fade
-    show arya stress at center
-    stop sound
-    play sound "audio/sfx/kibot.mp3" loop
-    n "Hari berganti tanpa sadar. Arya hanya mengenal tiga hal: layar, kopi, dan tekanan."
-
-    show bima angry at right
-    stop sound
-    b "Data ini masih salah! Ulang dari awal!"
-    a "Pak, saya udah kerja tiga malam tanpa tidur…"
-    b "Itu urusan kamu, bukan saya!"
-
-    n "(Telepon lagi — Lina.)"
-    show lina sad at left
-    l "(Mas, Ibu pingsan! Aku di rumah sakit. Tolong datang!)"
-
+    # [CHOICE 3: DILEMA TENGAH]
     menu:
-        "Pergi ke rumah sakit":
-            hide bima
-            hide lina
-            jump ep3_rumahsakit
-        "Tetap di kantor":
-            hide bima
-            hide lina
-            jump ep3_kantor
-        "Rekam semua percakapan dengan Bima":
-            hide bima
-            hide lina
-            jump ep3_rekam
+        "Darah mendidih. Rasanya ingin meledak. Apa yang Bima lakukan?"
 
-label ep3_rumahsakit:
-    scene bg hospital with fade
-    show arya stress at center
-    a "Maaf, Pak… tapi kali ini, aku nggak bisa tinggal diam."
-    n "(Arya berlari keluar gedung, wajahnya basah oleh hujan.)"
-    scene bg hospital with fade
-    show lina sad at left
-    l "Mas, aku takut banget…"
-    a "Tenang, Lin. Kita hadapi bareng."
-    hide lina
-    hide arya
-    jump episode4
+        "Tahan emosi. Fokus cari solusi (Logis).":
+            $ mental_bima += 1
+            $ renpy.notify("Mental Bima: Stabil (+1)")
+            
+            show bima tegas at left
+            b "(Tarik napas panjang) Oke. Tenang Bim. Lo jago. Lo bisa benerin ini. Anggap aja dia radio rusak."
+            n "Bima mencoba memisahkan perasaan dari pekerjaan. Dia kembali duduk dengan sisa tenaga terakhir."
 
-label ep3_kantor:
-    show arya stress at center
-    a "Kerja ini… nggak sepadan dengan yang hilang."
-    n "(Pesan masuk: 'Mas… Ibu di UGD.')"
-    hide lina
-    hide arya
-    jump episode4
+        "Muak. Mengutuk dalam hati (Emosional).":
+            $ mental_bima -= 1
+            $ renpy.notify("Mental Bima: Retak (-1)")
+            
+            show bima marah at left
+            b "(Mengepalkan tangan sampai putih) Awas lo tua bangka... Suatu saat gue bales... Liat aja nanti."
+            n "Dendam itu menggerogoti fokus Bima. Dia bekerja dengan hati yang penuh racun."
 
-label ep3_rekam:
-    show arya neutral at center
-    n "Arya diam, menyalakan perekam suara di bawah meja."
-    n "Setiap kata dari Bima jadi saksi."
-    hide arya
-    jump episode4
+    # --- SCENE 3: KLIMAKS (THE CALL) ---
+    scene bg kantor_malam with dissolve
+    # play sfx "audio/music/angin.mp3" loop fadein 2.0
+    
+    n "Jam 23:45 WIB."
+    n "Hujan badai mengguyur kaca kantor lantai 15. Kantor sudah kosong. Hanya sisa Bima dan cahaya monitor yang menyakitkan mata."
+    
+    # play sfx "audio/sfx/notif.mp3" loop # Jika ada sfx ringtone
+    
+    # Efek Visual Jantung
+    scene bg kantor_malam with heart_beat
+    pause 0.2
+    scene bg kantor_malam with heart_beat
+    
+    "{b}{color=#ff5252}INCOMING CALL: RINA{/color}{/b}"
+    
+    # stop sfx
+    b "(Mengangkat telepon dengan tangan gemetar) Halo... Dek?"
+    
+    r "{i}(Suara tangis pecah, nyaris berteriak){/i} MAS BIMA! MAS DIMANA?!"
+    r "Ibu Mas... Napas Ibu sempet berenti tadi! Dokter lagi pompa jantung Ibu sekarang!"
+    r "Mas cepetan ke sini... Aku takut sendirian Mas... Aku nggak mau Ibu pergi..."
+    
+    n "Dunia Bima runtuh seketika. Suara hujan mendadak hilang. Yang terdengar hanya denging panjang di telinganya."
+    b "Mas... Mas jalan sekarang."
 
+    # HARTONO MUNCUL MENGHALANGI
+    show hartono dingin at right with dissolve
+    
+    h "Eits. Mau kemana kamu?"
+    h "Saya lihat email, file revisinya belum masuk. Jangan bilang kamu mau kabur."
+    
+    b "Pak... Ibu saya sekarat. Di UGD. Saya harus pergi detik ini juga."
+    
+    h "(Tertawa kecil) Halah. Alasan klasik. Kemarin sakit, sekarang sekarat."
+    h "Dengar ya Bima. Klien besok datang jam 8 pagi. Kalau kamu melangkah keluar dari pintu itu sebelum file ini selesai..."
+    h "Simpan saja ID Card kamu. Jangan harap kamu bisa kerja di industri ini lagi. Saya pastikan nama kamu saya blacklist dari semua agensi."
+    
+    b "..."
+    h "Pikir pake otak, bukan pake perasaan. Kamu butuh duit buat bayar RS kan? Selesaikan kerjamu, baru jadi pahlawan kesiangan."
 
-label episode4:
-    scene bg office_meeting with fade
-    n "Hari itu, semua meledak."
-    show arya stress at center
-    show bima angry at right
-    b "Kamu pikir kamu siapa?! Kamu bikin klien marah besar!"
-    n "Karyawan lain terdiam. Arya menatap kosong."
+    # --- LOGIC GATE (PENENTUAN ENDING) ---
+    n "Waktu seakan berhenti. Di kiri ada pintu keluar (Keluarga). Di depan ada layar monitor (Karir/Uang)."
+    n "Apa yang tersisa di hati Bima setelah seharian ini?"
 
-    menu:
-        "Diam dan minta maaf (Pelarian)":
-            hide bima
-            hide arya
-            jump route_pelarian
-        "Balas membentak tanpa bukti (Keberanian)":
-            hide bima
-            hide arya
-            jump route_berani
-        "Ungkap bukti rekaman (jika ada)":
-            if BuktiTerkumpul:
-                hide bima
-                hide arya
-                jump route_bukti
-            else:
-                n "Arya ingin membalas, tapi tak punya bukti apapun."
-                hide bima
-                hide arya
-                jump route_berani
+    # SYARAT ENDING MASTERPIECE
+    if mental_bima >= 1 and family_bond >= 1:
+        jump ending_smart_masterpiece
+    elif family_bond >= 1:
+        jump ending_rebel_masterpiece
+    else:
+        jump ending_slave_masterpiece
 
+# ==============================================================================
+# 4. ENDING SECTION (DETAILED & EMOTIONAL)
+# ==============================================================================
 
-label route_berani:
-    show arya neutral at center
-    a "Selama ini saya kerja siang malam! Tapi Bapak nggak pernah lihat!"
-    show bima angry at right
-    b "Karena kamu gagal!"
-    a "Mungkin gagal jadi budak, iya."
-    b "Kamu dipecat!"
-    a "Terima kasih. Akhirnya saya bebas juga."
-    hide bima
-    hide arya
-    jump episode5_berani
+# --- ENDING 1: BONEKA BERNYAWA (BAD ENDING) ---
+label ending_slave_masterpiece:
+    stop music
+    play music "audio/music/sad_piano.mp3" loop 
+    
+    show bima lelah at left
+    
+    b "(Menunduk dalam, air mata menetes) ..."
+    b "(Dalam hati) Pak Hartono bener. Kalau gue dipecat, gue bayar RS pake apa? Gue nggak punya pilihan."
+    
+    b "Maaf, Pak. Saya... saya selesaikan. Tolong jangan pecat saya."
+    
+    h "Nah, gitu dong. Itu baru profesional. Jangan cengeng. Saya tunggu di ruangan saya."
+    hide hartono with moveoutright
 
-label route_bukti:
-    n "(Arya menyalakan rekaman suara Bima.)"
-    show arya neutral at center
-    show bima neutral at right
-    b "Revisi malam ini. Jangan tidur. Jam 6 standby."
-    n "Karyawan lain berbisik: 'Dia nyuruh lembur segitu parahnya?'"
-    a "Bapak pikir cuma saya yang lelah? Semua orang di sini sama."
-    n "(HRD masuk. Suasana berubah tegang.)"
-    hide bima
-    hide arya
-    jump episode5_bukti
+    scene bg kantor_malam
+    n "Bima duduk kembali ke kursinya. Kursi yang terasa seperti penjara."
+    n "Dia mengetik revisi dengan air mata yang terus menetes ke keyboard. Setiap 'klik' mouse terasa seperti menikam hatinya sendiri."
+    n "Jam 03:00 Pagi. Pekerjaan selesai. File terkirim."
 
-label route_pelarian:
-    show arya neutral at center
-    n "Arya hanya diam. Ia tunduk, meminta maaf."
-    n "Tapi di dalam hatinya, sesuatu perlahan retak."
-    hide arya
-    jump episode5_pelarian
+    scene bg rumah_sakit with slow_dissolve
+    n "Bima berlari menyusuri lorong rumah sakit yang bau obat-obatan. Sepi. Dingin."
+    
+    show rina senyum at center
+    # show rina nangis at center (Lebih emosional jika dia terlihat sedih)
+    
+    b "Dek! Ibu gimana? Mas udah transfer gaji Mas semua buat obat. Cukup kan?"
+    
+    r "..."
+    r "Uangnya udah masuk, Mas. Makasih. Administrasi lunas."
+    
+    b "Syukurlah... Mas boleh masuk? Mas mau minta maaf sama Ibu."
+    
+    r "(Menatap Bima dingin, matanya bengkak) Ibu udah tidur, Mas."
+    r "Tadi... pas Ibu kritis, Ibu manggil nama Mas Bima terus. Sampai suaranya habis."
+    r "Sekarang Ibu udah nggak sakit lagi. Mas pulang aja. Mas bau kantor."
+    
+    hide rina with dissolve
+    n "Rina masuk ke ruang rawat dan mengunci pintu. Klik."
+    n "Bima berdiri sendiri di lorong dingin itu. Dia memegang dompetnya yang tebal berisi gaji, tapi dadanya terasa kosong melompong."
+    n "Dia sadar, dia telah menjual jiwanya, dan tidak ada kembaliannya."
 
-
-label episode5_berani:
-    scene bg sunset_city with fade
-    n "Beberapa minggu berlalu."
-    show arya happy at center
-    show lina happy at left
-    l "Mas kelihatan beda sekarang."
-    a "Beda gimana?"
-    l "Lebih hidup. Meski nggak punya apa-apa."
-    a "Akhirnya aku tahu rasanya bernapas."
-    n "💪 RUTE 2 – Keberanian (Tanpa Bukti)"
+    scene black with fade
+    pause 2.0
+    "{b}{size=40}{color=#ff0000}BAD ENDING: BONEKA BERNYAWA{/color}{/size}{/b}\n\n(Kamu memilih keamanan finansial, tapi kehilangan kehangatan rumah selamanya.)"
     return
 
-label episode5_bukti:
-    scene bg office_newday with fade
-    show arya happy at center
-    show lina happy at left
-    n "Bima dipecat, dan kantor berubah sistemnya."
-    a "Bukan soal menang… tapi soal berani bilang ‘cukup’."
-    l "Mas, aku bangga."
-    n "📱 RUTE 3 – Keadilan (Dengan Bukti)"
+# --- ENDING 2: KEBEBASAN YANG NEKAT (NEUTRAL/EMOTIONAL ENDING) ---
+label ending_rebel_masterpiece:
+    stop music
+    play music "audio/music/bright_acoustic.mp3" loop 
+    
+    show bima marah at left with vpunch
+    b "CUKUP PAK!!!"
+    
+    h "Hah?! Kamu bentak saya?!"
+    
+    b "Bapak pikir saya ini mesin?! Ibu saya lagi bertaruh nyawa di sana!"
+    b "Persetan sama Klien! Persetan sama Blacklist Bapak! Saya nggak peduli!"
+    b "Saya resign. Detik ini juga. Makan tuh deadline!"
+    
+    play sfx "audio/sfx/table_slams.mp3" noloop volume 2 # Menggunakan SFX bentak meja untuk lempar kartu
+    n "Bima melempar ID Card-nya tepat ke dada Pak Hartono. Plak! Dia berlari keluar tanpa menoleh."
+    
+    scene bg hujan_jalan with flash
+    n "Bima memacu motornya menembus badai. Basah kuyup. Dingin. Dia tahu besok dia pengangguran."
+    n "Tapi anehnya... dadanya terasa lapang. Seperti baru pertama kali bernapas lega dalam 5 tahun terakhir."
+
+    scene bg rumah_sakit with slow_dissolve
+    
+    show rina nangis at left
+    show bima tegas at right
+    
+    b "DEK! IBU!"
+    
+    r "Mas Bima! Mas dateng!"
+    n "Rina langsung memeluk kakaknya erat. Tangisnya pecah, tapi kali ini tangis lega."
+    
+    r "Ibu udah lewat masa kritisnya Mas... Dokter bilang Ibu kuat."
+    
+    b "(Lemas, jatuh terduduk) Alhamdulillah..."
+    b "Dek, maafin Mas ya. Mas udah keluar dari kerjaan. Mas sekarang pengangguran. Kita mungkin bakal susah makan besok."
+    
+    r "(Tersenyum sambil menghapus air mata) Nggak apa-apa Mas. Kita bisa makan nasi garem."
+    r "Yang penting Mas Bima ada di sini. Itu udah cukup buat Rina sama Ibu."
+    
+    scene black with fade
+    n "Malam itu, di ruang tunggu RS yang sempit, Bima tidur dengan nyenyat."
+    n "Masa depan gelap, dompet tipis, tapi hatinya penuh."
+    
+    "{b}{size=40}{color=#FFD700}NEUTRAL ENDING: KEBEBASAN YANG NEKAT{/color}{/size}{/b}\n\n(Kamu kehilangan karir, tapi memenangkan kembali keluargamu.)"
     return
 
-label episode5_pelarian:
-    scene bg bus_night with fade
-    show arya neutral at center
-    n "Bus malam melaju ke arah barat. Langit oranye perlahan pudar."
-    a "Entah ke mana aku pergi. Tapi untuk pertama kalinya… aku bisa tidur."
-    n "🚌 RUTE 4 – Pelarian"
-    return
-
-label episode5_patuh:
-    scene bg office_window with fade
-    show arya stress at center
-    a "Aku naik jabatan, punya uang… tapi nggak punya siapa-siapa."
-    a "Mungkin aku cuma hidup di layar yang sama tiap hari."
-    n "🏢 RUTE 1 – Kemenangan Kosong"
+# --- ENDING 3: KESEIMBANGAN SEMPURNA (TRUE/GOOD ENDING) ---
+label ending_smart_masterpiece:
+    stop music
+    play music "audio/music/achievement.mp3" loop
+    
+    show bima tegas at left
+    b "(Menutup mata sejenak, menarik napas dalam, lalu menatap tajam Hartono)"
+    b "Pak Hartono. Dengar saya baik-baik."
+    
+    h "Apa lagi? Mau nyerah?"
+    
+    b "Saya akan pergi ke RS sekarang. Itu tidak bisa ditawar."
+    b "TAPI... Saya bawa laptop saya. Saya akan kerjakan revisi itu di ruang tunggu RS."
+    
+    h "Hah? Kamu pikir saya percaya?"
+    
+    b "Bapak tahu kualitas saya. Selama 3 tahun saya tidak pernah mengecewakan Bapak."
+    b "Subuh nanti file sudah ada di email Bapak. Klien puas, Bapak aman, dan saya bisa menemani Ibu saya."
+    b "Tapi kalau Bapak tetap menghalangi saya keluar dari pintu itu..."
+    b "Saya pastikan saya akan teriak sekencang-kencangnya kalau Bapak menahan karyawan yang orang tuanya sekarat. Biar satu gedung dengar."
+    
+    h "..."
+    h "(Terdiam, melihat sorot mata Bima yang tidak main-main)"
+    h "Cih. Dasar keras kepala."
+    h "Sana pergi. Tapi awas kalau jam 5 pagi belum masuk email saya!"
+    
+    b "Terima kasih, Pak."
+    
+    scene bg rumah_sakit with fade
+    n "Suasana RS tenang. Bunyi monitor jantung terdengar teratur."
+    
+    show bima lelah at center
+    n "Bima duduk di lantai, memangku laptopnya. Matanya merah kurang tidur, tapi jarinya menari lincah di atas keyboard."
+    n "Di sebelahnya, Rina tertidur di bahu Bima. Dan di ranjang, Ibu bernapas dengan tenang."
+    
+    b "(Tersenyum tipis) Selesai. Send."
+    
+    n "Bima menutup laptopnya. Dia berhasil. Dia tidak mengorbankan siapapun hari ini."
+    n "Dia membuktikan bahwa dia bukan lagi anak buah yang bisa diinjak, melainkan seorang Pria yang punya prinsip."
+    
+    scene black with slow_dissolve
+    pause 2.0
+    "{b}{size=40}{color=#00e676}TRUE ENDING: MASTER OF LIFE{/color}{/size}{/b}\n\n(Selamat! Logika dan Hatimu berjalan seirama. Kamu menang telak.)"
     return
