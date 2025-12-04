@@ -31,9 +31,15 @@ Every choice Arya makes carries emotional consequences—each decision pushing h
 
 ---
 
+## 📂 Pre-Released Version
+
+- [Download](https://github.com/xyukii/thedusk-boundaryline-game/releases/tag/v.1.5)
+
+---
+
 ## 🚀 Getting Started
 
-### Prerequisites
+### Software Usage Lists
 
 - [Twine](https://twinery.org/)
 - [Renpy](https://www.renpy.org/)
