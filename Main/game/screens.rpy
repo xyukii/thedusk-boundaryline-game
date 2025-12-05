@@ -210,67 +210,64 @@ style input:
 # CHOICE MENU - VERSI CODING (FINAL & FIXED)
 # =========================================================
 
+# --- ENHANCED CHOICE MENU ---
+
 screen choice(items):
     style_prefix "choice"
 
     vbox:
         xalign 0.5
         yalign 0.5
-        spacing 20 # Jarak antar tombol
+        spacing 25
 
         for i in items:
             textbutton i.caption:
                 action i.action
                 style "choice_button"
 
-# ---------------------------------------------------------
-# STYLE DEFINITION
-# ---------------------------------------------------------
+# --- STYLES ---
 
 style choice_vbox:
     xalign 0.5
     yalign 0.5
 
 style choice_button is button:
-    # --- BAGIAN YANG DIPERBAIKI ---
-    # Hapus baris 'properties' sepenuhnya.
-    # Kita atur manual di sini:
+    # Ukuran Tombol (Sesuaikan lebar/tinggi)
+    xsize 900 
+    ysize 80
     
-    # 1. Ukuran Tombol
-    xsize 700
-    ysize 70
+    # Posisi
     xalign 0.5
     yalign 0.5
     
-    # 2. Warna Background (Pakai Kode Warna / Solid)
-    # Format: "#RRGGBB" (Hex Color) atau "#RRGGBBAA" (Transparan)
+    # --- BAGIAN 1: BACKGROUND SAAT DIAM (IDLE) ---
+    # Saya set ke Hitam Transparan (Glass Effect)
+    # Ganti "#000000cc" dengan warna lain jika mau.
+    # (cc di belakang adalah level transparansi)
+    background Solid("#000000cc") 
     
-    # Saat diam (Abu-abu Gelap Transparan)
-    background Solid("#212121cc") 
+    # --- BAGIAN 2: BACKGROUND SAAT DISENTUH (HOVER) ---
+    # Saya set ke Abu-Biru Terang (Biar kelihatan beda saat dipilih)
+    # Ganti "#455a64ff" dengan warna pilihanmu (misal Emas: "#FFD700")
+    hover_background Solid("#455a64ff") 
     
-    # Saat disentuh (Abu-abu Terang)
-    hover_background Solid("#505050ff")
-    
-    # 3. Jarak teks ke pinggir
-    padding (50, 10)
+    # Jarak teks dari pinggir tombol
+    padding (50, 15)
 
 style choice_button_text is text:
-    # Hapus baris 'properties' text juga biar aman
-    
     xalign 0.5
     yalign 0.5
     text_align 0.5
     size 30
     
-    # Warna Teks
-    color "#ffffff"          # Putih
-    hover_color "#ffcc00"    # Kuning Emas saat di-hover
+    # Warna Teks saat diam
+    color "#cfd8dc"
     
-    # Outline (Garis pinggir teks biar jelas)
-    outlines [(1, "#00000088", 1, 1)]## Layar Menu Cepat/Quick Menu #################################################
-##
-## Menu cepat ditampilkan dalam game untuk memudahkan akses ke menu di luar
-## game.
+    # Warna Teks saat disentuh (Biar makin kontras)
+    hover_color "#ffffff"
+    
+    # Garis pinggir teks biar terbaca jelas
+    outlines [(2, "#00000088", 1, 1)]
 
 screen quick_menu():
 
@@ -325,15 +322,13 @@ style quick_button_text:
 ## navigasi ke menu lainnya, dan untuk memulai permainan.
 
 screen navigation():
-
     vbox:
         style_prefix "navigation"
-
-        # POSISI MENU: Digeser lebih ke kiri (dari 120 ke 50)
-        xpos 50
+        
+        # Posisi Menu di Kiri
+        xpos 100
         yalign 0.5
-
-        spacing 10 # Jarak antar tombol
+        spacing 15
 
         if main_menu:
             textbutton _("MULAI") action Start()
@@ -342,7 +337,7 @@ screen navigation():
             textbutton _("SIMPAN") action ShowMenu("save")
 
         textbutton _("MUAT") action ShowMenu("load")
-        textbutton _("SETTING") action ShowMenu("preferences")
+        textbutton _("PENGATURAN") action ShowMenu("preferences") # Ganti 'Setting' jadi 'Pengaturan' biar baku
 
         if _in_replay:
             textbutton _("AKHIRI REPLAY") action EndReplay(confirm=True)
@@ -352,12 +347,12 @@ screen navigation():
         textbutton _("TENTANG") action ShowMenu("about")
 
         if renpy.variant("pc"):
-            # Beri jarak sedikit untuk tombol keluar
-            null height 30
             textbutton _("KELUAR") action Quit(confirm=not main_menu)
 # --- GAYA TOMBOL NAVIGASI MODERN ---
 
 # --- GAYA TOMBOL NAVIGASI MODERN (FIXED) ---
+
+# --- STYLE MODERN ---
 
 style navigation_button is gui_button
 style navigation_button_text is gui_button_text
@@ -365,35 +360,28 @@ style navigation_button_text is gui_button_text
 style navigation_button:
     size_group "navigation"
     
-    # Ukuran area tombol
-    # XSIZE: Dikecilkan agar tidak terlalu lebar (dari 400 ke 350)
-    xsize 350
-    ysize 60
+    # HAPUS background gambar, ganti jadi transparan/solid
+    background None 
     
-    # Background: Transparan saat diam, Highlight yang lebih lembut saat disentuh
-    background None
-    hover_background Solid("#ffca2815") # Menggunakan warna kuning emas transparan
+    # Efek saat disentuh mouse (Hover): Garis putih transparan
+    hover_background Solid("#ffffff10") 
+    
+    xsize 400
+    ysize 60
 
 style navigation_button_text:
-    # HAPUS juga properties di sini
+    # Hapus properties default
+    # properties gui.text_properties("navigation_button")
     
-    # Font & Ukuran
-    # Saya comment font-nya agar tidak error "File Not Found" jika kamu belum punya file font-nya
-    # font "gui/font/DejaVuSans.ttf" 
-    
+    # Font dihapus agar pakai default
     size 40
-    xalign 0.0 # Rata Kiri
+    xalign 0.0 
     
-    # WARNA TEKS
-    color "#b0bec5"          # Abu-abu kebiruan (Idle)
-    hover_color "#ffca28"    # Kuning Emas (Hover/Disentuh)
-    selected_color "#ffffff" # Putih (Saat menu aktif)
+    color "#b0bec5"          
+    hover_color "#ffca28"    
+    selected_color "#ffffff" 
     
-    # ANIMASI MIKRO
-    # Teks akan geser 15 pixel ke kanan saat disentuh mouse
     hover_xoffset 15 
-    
-    # Outline biar teks tajam
     outlines [(2, "#000000", 2, 2)]
 
 # --- GAYA JUDUL GAME ---
@@ -419,37 +407,31 @@ style main_menu_version:
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
 
 screen main_menu():
-
-    ## Tag ini memastikan layar menu lain diganti.
     tag menu
 
-    # 1. Background Gambar Utama
+    # 1. Background Gambar (Otomatis ambil dari gui.main_menu_background)
     add gui.main_menu_background
 
-    # 2. OVERLAY GRADASI (Biar teks kebaca & Cinematic)
-    # Kita pakai Solid color hitam transparan (Alpha 0.6)
-    add Transform(Solid("#00000099"), alpha=0.7)
+    # 2. Overlay Gelap (Biar teks kebaca & Cinematic)
+    # Ini bikin efek kaca gelap yang elegan
+    add Solid("#00000099") 
 
-    # 3. NAVIGASI (Tombol Mulai, dll)
+    # 3. Navigasi
     use navigation
 
-    # 4. JUDUL GAME & VERSI (Rata Kanan Bawah)
+    # 4. Judul Game
     if gui.show_name:
-
         vbox:
-            # Posisi Judul
             xalign 0.95
-            yalign 0.90
-            spacing 10
-
+            yalign 0.95
+            
             text "[config.name!t]":
                 style "main_menu_title"
-                xalign 1.0 # Rata kanan
-
+                xalign 1.0
+            
             text "v[config.version]":
                 style "main_menu_version"
-                xalign 1.0 # Rata kanan
-                color "#cfd8dc" # Abu terang
+                xalign 1.0
 
 
 style main_menu_frame is empty
@@ -575,24 +557,31 @@ style return_button_text is navigation_button_text
 # --- Gaya game_menu ---
 
 style game_menu_navigation_frame:
-    # XSIZE: Dikecilkan agar sesuai dengan tombol navigasi yang baru (dari 400 ke 350)
-    xsize 350
+    xsize 320 # Keep the left menu area fixed width
     yfill True
 
 style game_menu_content_frame:
-    # LEFT_MARGIN: Disesuaikan agar konten lebih luas (dari 420 ke 380)
-    left_margin 380
-    top_margin 10
+    # --- FIX OVERLAP ---
+    # This pushes the content box further right, away from the menu
+    left_margin 360 
+    
+    # Add breathing room on the right side too
+    right_margin 60
+    
+    top_margin 30
+    bottom_margin 30
 
 style game_menu_label_text:
     size 60
-    color "#ffffff" # Putih Bersih
+    color "#ffffff"
+    outlines [(2, "#000000", 2, 2)]
+    
     xalign 0.0
-    ypos 40
-    # XPOS: Disesuaikan agar judul rata dengan konten (dari 480 ke 420)
-    xpos 420 
-    outlines [(2, "#00000088", 2, 2)]   
-
+    yalign 0.0 
+    
+    # Koordinat Judul (Pojok Kiri Atas area konten)
+    xpos 450 
+    ypos 50
 ## Layar About #################################################################
 ##
 ## Layar ini menampilkan credit dan informasi copyright tentang game dan Ren.Py.
@@ -698,36 +687,28 @@ screen load():
 
 
 screen file_slots(title):
-
-    default page_name_value = FilePageNameInputValue(pattern=("Halaman {}"), auto=("Otomatis Save"), quick=_("Save Cepat"))
-
+    default page_name_value = FilePageNameInputValue(pattern=_("Halaman {}"), auto=_("Otomatis Save"), quick=_("Save Cepat"))
     use game_menu(title):
-
         fixed:
             order_reverse True
 
-            ## 1. TITLE (Top Right)
+            # Judul Halaman (Geser ke kiri lagi biar aman)
             button:
                 style "page_label"
                 key_events True
-                xalign 0.95
-                yalign 0.05
+                xalign 0.90 
+                yalign 0.02
                 action page_name_value.Toggle()
-
                 input:
                     style "page_label_text"
                     value page_name_value
 
-   
+            # Grid Save
             grid 3 2:
                 style_prefix "slot"
-                
-                # Posisi Tengah
                 xalign 0.5
                 yalign 0.5
-                
-                # Jarak antar kotak (Dikecilkan dikit biar muat)
-                spacing 20 
+                spacing 15 # Jarak diperkecil biar muat
 
                 for i in range(3 * 2):
                     $ slot = i + 1
@@ -735,12 +716,12 @@ screen file_slots(title):
                         action FileAction(slot)
                         has vbox
                         
-                        # Pastikan ukuran gambar screenshot mengikuti ukuran tombol
-                        add FileScreenshot(slot) xalign 0.5 yalign 0.0 xysize (250, 140)
+                        # Ukuran gambar disesuaikan dengan tombol baru
+                        add FileScreenshot(slot) xalign 0.5 yalign 0.0 xysize (240, 135)
                         
-                        null height 10
+                        null height 5
                         
-                        text FileTime(slot, format=("{#file_time}%d %b %Y, %H:%M"), empty=("Slot Kosong")):
+                        text FileTime(slot, format=_("{#file_time}%d %b %Y, %H:%M"), empty=_("Slot Kosong")):
                             style "slot_time_text"
                         
                         text FileSaveName(slot):
@@ -748,33 +729,20 @@ screen file_slots(title):
                         
                         key "save_delete" action FileDelete(slot)
 
-            ## 3. PAGINATION (Bottom)
+            # Navigasi Halaman
             hbox:
                 style_prefix "page"
                 xalign 0.5
-                yalign 0.95
-                spacing 15
-
+                yalign 0.98
+                spacing 10
                 textbutton _("<") action FilePagePrevious()
                 if config.has_autosave:
                     textbutton _("A") action FilePage("auto")
                 if config.has_quicksave:
                     textbutton _("Q") action FilePage("quick")
-                
                 for page in range(1, 6):
                     textbutton "[page]" action FilePage(page)
-
                 textbutton _(">") action FilePageNext()
-
-                if config.has_sync:
-                    if CurrentScreenName() == "save":
-                        textbutton _("Upload Sync"):
-                            action UploadSync()
-                            xalign 0.5
-                    else:
-                        textbutton _("Download Sync"):
-                            action DownloadSync()
-                            xalign 0.5
 
 
 style page_label is gui_label
@@ -790,30 +758,27 @@ style slot_time_text is slot_button_text
 style slot_name_text is slot_button_text
 
 style slot_button:
-    # Ukuran diperkecil lagi agar muat 3 kolom dengan lega
-    xsize 270  
+    # Ukuran diperkecil lagi sedikit agar aman
+    xsize 260
     ysize 200
     
-    # Warna Background
-    background Solid("#263238") 
-    hover_background Solid("#37474f")
+    background Solid("#263238cc")
+    hover_background Solid("#37474fee")
     
-    # Border
-    outlines [(2, "#00000088", 1, 1)]
-    padding (10, 10)
+    outlines [(1, "#ffffff33", 1, 1)]
+    padding (8, 8)
 
 style slot_button_text:
-    size 16
+    size 14
     color "#eceff1"
     xalign 0.5
-    yalign 0.95
+    yalign 0.98
 
 style slot_time_text:
-    size 14
+    size 12
     color "#90a4ae"
     xalign 0.5
-    yalign 0.05
-
+    yalign 0.02
 style page_label:
     xpadding 50
     ypadding 5
@@ -836,9 +801,7 @@ style page_button_text:
     color "#b0bec5"
     hover_color "#ffca28" 
     size 30
-    
-    # HAPUS BARIS FONT DI BAWAH INI:
-    # font "gui/font/DejaVuSans.ttf"
+    # Font dihapus
 
 style page_label_text:
     color "#ffffff"
@@ -855,86 +818,97 @@ style page_label_text:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
 
+
+
 screen preferences():
-
     tag menu
-
-    use game_menu(_("Setting"), scroll="viewport"):
-
+    use game_menu(_("PENGATURAN"), scroll="viewport"):
+        
         vbox:
+            # --- PEMAKSA JARAK (ANTI NABRAK JUDUL) ---
+            # Ini akan mendorong semua isi setting ke bawah sejauh 150px
+            null height 150 
+            
+            xsize 900
+            spacing 30
 
+            # --- BARIS 1: TAMPILAN & SKIP ---
             hbox:
-                box_wrap True
-
-                if renpy.variant("pc") or renpy.variant("web"):
-
+                spacing 100 # Jarak kiri-kanan
+                
+                # Kolom Kiri
+                vbox:
+                    spacing 15
+                    label _("MODE LAYAR") style "pref_label_header"
                     vbox:
                         style_prefix "radio"
-                        label _("Tampilan")
+                        spacing 5
                         textbutton _("Jendela") action Preference("display", "window")
                         textbutton _("Layar Penuh") action Preference("display", "fullscreen")
 
+                # Kolom Kanan
                 vbox:
-                    style_prefix "check"
-                    label _("Lompati")
-                    textbutton _("Belum Terlihat") action Preference("skip", "toggle")
-                    textbutton _("Setelah Pilihan") action Preference("after choices", "toggle")
-                    textbutton _("Transisi") action InvertSelected(Preference("transitions", "toggle"))
+                    spacing 15
+                    label _("SKIP OPTIONS") style "pref_label_header"
+                    vbox:
+                        style_prefix "check"
+                        spacing 5
+                        textbutton _("Skip Belum Dibaca") action Preference("skip", "toggle")
+                        textbutton _("Skip Setelah Pilihan") action Preference("after choices", "toggle")
 
-                ## Tipe tambahan vboxes "radio_pref" atau "check_pref" dapat di
-                ## tambahkan disini, untuk menambahkan tambahan preferensi yang
-                ## dibuat creator.
+            # --- BARIS 2: AUDIO ---
+            null height 20
+            label _("AUDIO & KECEPATAN") style "pref_label_header"
+            
+            grid 2 4:
+                xfill True
+                spacing 15
+                
+                label _("Kecepatan Teks") style "pref_label_sub"
+                bar value Preference("text speed") xsize 350
 
-            null height (4 * gui.pref_spacing)
+                label _("Kecepatan Auto") style "pref_label_sub"
+                bar value Preference("auto-forward time") xsize 350
+                
+                label _("Volume Musik") style "pref_label_sub"
+                bar value Preference("music volume") xsize 350
+                
+                label _("Volume Suara") style "pref_label_sub"
+                bar value Preference("sound volume") xsize 350
 
-            hbox:
-                style_prefix "slider"
-                box_wrap True
+# --- STYLE KHUSUS SETTING ---
 
-                vbox:
+style pref_label_header:
+    color "#ffca28"
+    size 26
+    bold True
+    bottom_margin 5
+    # Font dihapus
 
-                    label _("Kecepatan Text")
+style pref_label_sub:
+    color "#eceff1" # Warna Putih
+    size 22
+    yalign 0.5
 
-                    bar value Preference("text speed")
+style radio_button:
+    background None
+    padding (5, 5)
 
-                    label _("Waktu Otomatis-Maju")
+style check_button:
+    background None
+    padding (5, 5)
 
-                    bar value Preference("auto-forward time")
+style radio_button_text:
+    size 18          # Smaller button text
+    color "#b0bec5"
+    hover_color "#ffffff"
+    selected_color "#ffca28"
 
-                vbox:
-
-                    if config.has_music:
-                        label _("Volume Musik")
-
-                        hbox:
-                            bar value Preference("music volume")
-
-                    if config.has_sound:
-
-                        label _("Volume Suara")
-
-                        hbox:
-                            bar value Preference("sound volume")
-
-                            if config.sample_sound:
-                                textbutton _("Tes") action Play("sound", config.sample_sound)
-
-
-                    if config.has_voice:
-                        label _("Volume Vokal")
-
-                        hbox:
-                            bar value Preference("voice volume")
-
-                            if config.sample_voice:
-                                textbutton _("Tes") action Play("voice", config.sample_voice)
-
-                    if config.has_music or config.has_sound or config.has_voice:
-                        null height gui.pref_spacing
-
-                        textbutton _("Senyapkan Semua"):
-                            action Preference("all mute", "toggle")
-                            style "mute_all_button"
+style check_button_text:
+    size 18          # Smaller button text
+    color "#b0bec5"
+    hover_color "#ffffff"
+    selected_color "#ffca28"
 
 
 style pref_label is gui_label
@@ -1412,30 +1386,39 @@ screen notify(message):
     style_prefix "notify"
 
     frame at notify_appear:
-        text "[message!tq]"
+        # Tambahkan ikon atau simbol visual
+        text "ⓘ  [message!tq]" 
 
     timer 3.25 action Hide('notify')
 
-
+# Animasi Muncul (Slide Down)
 transform notify_appear:
     on show:
-        alpha 0
-        linear .25 alpha 1.0
+        ypos -50
+        alpha 0.0
+        linear 0.25 ypos 30 alpha 1.0
     on hide:
-        linear .5 alpha 0.0
-
+        linear 0.5 alpha 0.0
 
 style notify_frame is empty
 style notify_text is gui_text
 
 style notify_frame:
-    ypos gui.notify_ypos
-
-    background Frame("gui/notify.png", gui.notify_frame_borders, tile=gui.frame_tile)
-    padding gui.notify_frame_borders.padding
+    ypos 30 # Jarak dari atas layar
+    xalign 0.02 # Jarak dari kiri layar
+    
+    # Background Modern: Hitam Kaca dengan garis samping Emas
+    background Frame(Solid("#1a1a1ae6"), Borders(5, 0, 0, 0)) 
+    
+    # Padding
+    xpadding 30
+    ypadding 15
 
 style notify_text:
-    properties gui.text_properties("notify")
+    color "#ffffff"
+    size 24
+    bold True
+    outlines [(2, "#000000", 1, 1)]
 
 
 ## Layar NVL ###################################################################
@@ -1702,19 +1685,16 @@ style game_menu_outer_frame:
     background "gui/phone/overlay/game_menu.png"
 
 style game_menu_navigation_frame:
-    xsize 280 # Lebar menu kiri dikecilkan sedikit
+    xsize 360  # Diperlebar dari 300/320 agar teks "MENU UTAMA" muat
     yfill True
 
 style game_menu_content_frame:
-    # --- KUNCI AGAR KE TENGAH ---
-    # Jarak dari kiri dikurangi (sebelumnya 360/400) biar geser ke kiri
-    left_margin 300 
+    # Jarak dari kiri diperbesar jadi 450 biar jauh dari menu samping
+    left_margin 450 
     
-    # Beri jarak dari kanan (supaya tidak mentok layar kanan)
-    right_margin 100 
-    
-    top_margin 30
-    bottom_margin 30
+    right_margin 50
+    top_margin 20 
+    bottom_margin 20
 
 style game_menu_viewport:
     variant "small"
